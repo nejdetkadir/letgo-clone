@@ -1,0 +1,38 @@
+#authenticationModal.modal.fade(tabindex='-1' aria-labelledby='authenticationModalLabel' aria-hidden='true')
+  .modal-dialog.modal-dialog-centered.modal-dialog-scrollable
+    .modal-content
+      .modal-header
+        = link_to "Yardım", root_path, class: "modal-title text-decoration-none text-secondary"
+        button.btn-close(type='button' data-bs-dismiss='modal' aria-label='Close')
+      .modal-body
+        .text-center.mt-4
+          = image_tag "letgo-logo.png", width: "70"
+          p.mt-4.fw-normal Çek, yükle, mesaj at, letgo ile kolay sat!
+        .mt-5.d-flex.justify-content-between.align-items-center.text-secondary
+          .col-3
+            hr
+          .col-6.text-center HIZLICA BAĞLAN
+          .col-3
+            hr
+        = link_to user_google_oauth2_omniauth_authorize_path, class: "text-decoration-none", method: :post do
+          .d-grid.gap-2.mt-3
+            button.btn.btn-google-omniauth
+              = icon "fab", "google", class: "me-2"
+              | Google ile devam et
+        = link_to user_github_omniauth_authorize_path, class: "text-decoration-none", method: :post do
+          .d-grid.gap-2.mt-2
+            button.btn.btn-github-omniauth
+              = icon "fab", "github", class: "me-2"
+              | Github ile devam et
+        .mt-3.d-flex.justify-content-between.align-items-center.text-secondary
+          .col-2
+            hr
+          .col-8.text-center VEYA E-POSTANI KULLAN
+          .col-2
+            hr
+        = link_to new_user_session_path, class: "text-decoration-none" do
+          .d-grid.gap-2.mt-2
+            button.btn.btn-letgo
+              = icon "fas", "envelope", class: "me-2"
+              | E-posta ile devam et
+        p.terms.text-center.mt-4.text-secondary Kaydolarak veya giriş yaparak Şartlar ve Koşullar ve Gizlilik Politikasını kabul etmiş olursun

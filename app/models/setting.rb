@@ -4,6 +4,7 @@ class Setting < RailsSettings::Base
 
   # Define your fields
   field :host, type: :string, default: "http://localhost:3000"
+  field :title, type: :string, default: "Letgo"
   # field :default_locale, default: "en", type: :string
   # field :confirmable_enable, default: "0", type: :boolean
   # field :admin_emails, default: "admin@rubyonrails.org", type: :array

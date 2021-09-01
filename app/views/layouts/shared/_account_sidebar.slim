@@ -1,0 +1,34 @@
+#offcanvasAccount.offcanvas.offcanvas-end(tabindex='-1' aria-labelledby='offcanvasAccountLabel')
+  .offcanvas-header
+    img(src="https://image.flaticon.com/icons/png/512/1946/1946429.png" height="72")
+    .mt-2
+      - if user_signed_in?
+        = link_to edit_user_registration_path, class: "btn fw-normal text-white text-decoration-none p-0 text-start" do
+          .text-start #{current_user.email}
+          small.text-start Bandırma
+      - else
+        button.btn.fw-normal.text-white.text-decoration-none.p-0(type="button" data-bs-toggle="modal" data-bs-target="#authenticationModal")
+          | Şimdi giriş yap
+          br
+          small Giriş yapmadın
+  .offcanvas-body
+    .list-group
+      = link_to root_path, class: "list-group-item list-group-item-action" do
+        = icon "fas", "home", class: "pe-2"
+        .fw-normal Keşfet
+      = link_to root_path, class: "list-group-item list-group-item-action" do
+        = icon "fas", "info-circle", class: "pe-2"
+        .fw-normal letgo hakkında
+      = link_to root_path, class: "list-group-item list-group-item-action" do
+        = icon "fas", "list-alt", class: "pe-2"
+        .fw-normal Şartlar ve Koşullar
+      = link_to root_path, class: "list-group-item list-group-item-action" do
+        = icon "fas", "shield-alt", class: "pe-2"
+        .fw-normal Gizlilik Politikası
+      - if user_signed_in?
+        = link_to edit_user_registration_path, class: "list-group-item list-group-item-action" do
+          = icon "fas", "user", class: "pe-2"
+          .fw-normal Profilim
+        = link_to destroy_user_session_path, class: "list-group-item list-group-item-action", method: :delete do
+          = icon "fas", "sign-out-alt", class: "pe-2"
+          .fw-normal Çıkış Yap

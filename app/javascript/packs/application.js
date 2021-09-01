@@ -22,8 +22,8 @@ import store from "../src/store/index"
 Vue.use(TurbolinksAdapter);
 
 // components
-import App from "../src/components/app.vue";
-Vue.component("app", App);
+import search_bar from "../src/components/search_bar";
+Vue.component("search-bar", search_bar)
 
 document.addEventListener("turbolinks:load", () => {
   new Vue({

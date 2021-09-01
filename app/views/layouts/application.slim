@@ -1,16 +1,39 @@
 doctype html
 html
   head
-    title RailsBoilerplate
+    title #{Setting.title.downcase}
     meta[name="viewport" content="width=device-width,initial-scale=1"]
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    p.notice
-      = notice
-    p.alert
-      = alert
     div(data-behavior="vue")
-      = yield
+      nav#navbar.navbar.navbar-expand-md.navbar-dark.fixed-top.shadow
+        .container
+          .col-2.text-center
+            = link_to root_path do
+              = image_tag "letgo-logo.png", height: "45"
+          .col-6
+            search-bar
+          .col-4
+            .d-flex.justify-content-evenly
+              button.btn.btn-letgo.btn-sm.fw-bold(type="button" data-bs-toggle="#{user_signed_in? ? 'offcanvas' : 'modal'}" data-bs-target="##{user_signed_in? ? 'offcanvasProduct' : 'authenticationModal'}" aria-controls="#{'offcanvasProduct' if user_signed_in?}")
+                = icon "fas", "camera", class: "me-2"
+                | Sat
+              - if user_signed_in?
+                = link_to root_path, class: "btn header-icon" do
+                  = icon "fas", "comment"
+                = link_to root_path, class: "btn header-icon" do
+                  = icon "fas", "bell"
+              - else
+                button.btn.btn-letgo-outline.btn-sm.fw-bold(type="button" data-bs-toggle="modal" data-bs-target="#authenticationModal") Giriş
+              button.btn.header-icon(type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasAccount" aria-controls="offcanvasAccount")
+                = icon "fas", "bars"
+      .container
+        = yield
+        = render "layouts/shared/account_sidebar"
+        - if user_signed_in?
+          = render "layouts/shared/product_sidebar"
+        - else
+          = render "devise/shared/modal"

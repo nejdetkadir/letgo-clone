@@ -1,3 +1,6 @@
+.card
+  .card-body
+    p deneme
 h1 Welcome#index
 p Find me in app/views/welcome/index.slim
 - if user_signed_in?
@@ -7,4 +10,3 @@ p Find me in app/views/welcome/index.slim
   = link_to t('sessions.new.title'), new_user_session_path
   br
   = link_to t('registrations.new.title'), new_user_registration_path
-app
