@@ -13,7 +13,7 @@ module RailsBoilerplate
     config.exceptions_app = routes
 
     # I18n Config
-    config.i18n.default_locale = :en
+    config.i18n.default_locale = :tr
 
     # support Turkish and English as locales
     I18n.available_locales = %i[tr en]

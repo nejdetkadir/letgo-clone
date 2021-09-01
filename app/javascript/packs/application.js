@@ -11,6 +11,9 @@ import "channels";
 // bootstrap
 import "bootstrap/dist/js/bootstrap.bundle";
 
+// toastr
+global.toastr = require("toastr")
+
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
