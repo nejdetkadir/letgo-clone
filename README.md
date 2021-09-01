@@ -1,6 +1,6 @@
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/37165033253842d78006d961e892ec02)](https://www.codacy.com/gh/nejdetkadir/rails-boilerplate/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nejdetkadir/rails-boilerplate&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/fcb1a4c12f8c4c3b844e2a617a3744b6)](https://www.codacy.com/gh/nejdetkadir/letgo-clone/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nejdetkadir/letgo-clone&amp;utm_campaign=Badge_Grade)
 
-# Rails Boilerplate
+# Letgo Clone
 It is a clone application of [Letgo](https://www.letgo.com/), created with Ruby on Rails & VueJS
 
 ![logo](doc/logo.png)
