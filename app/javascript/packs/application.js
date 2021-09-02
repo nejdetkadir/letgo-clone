@@ -12,7 +12,7 @@ import "channels";
 import "bootstrap/dist/js/bootstrap.bundle";
 
 // toastr
-global.toastr = require("toastr")
+global.toastr = require("toastr");
 
 Rails.start();
 Turbolinks.start();
@@ -20,8 +20,10 @@ ActiveStorage.start();
 
 import TurbolinksAdapter from "vue-turbolinks";
 import Vue from "vue/dist/vue.esm";
-import store from "../src/store/index"
+import store from "../src/store/index";
+import Vuelidate from 'vuelidate';
 
+Vue.use(Vuelidate)
 Vue.use(TurbolinksAdapter);
 
 // components

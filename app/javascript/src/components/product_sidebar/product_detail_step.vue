@@ -2,11 +2,13 @@
 import {mapState} from "vuex";
 import draggable from "vuedraggable";
 import fileInput from "./file_input.vue";
+import { required, maxLength } from "vuelidate/lib/validators";
 
 export default {
   data() {
     return{
       inputForm: {
+        price: "",
         isFree: false,
         name: "",
         description: "",
@@ -23,14 +25,39 @@ export default {
   methods: {
     handleImage(file) {
       return URL.createObjectURL(file)
+    },
+    onSubmitForm() {
+      this.$v.$touch()
+      if (!this.$v.$invalid) {
+        window.console.log("sendFormAction")
+      }
     }
   },
-  watch: {
-    'inputForm.description'(val) {
-      if (val.length > this.validations.maxDescriptionLength && this.inputForm.isDisabled == false) {
-        this.inputForm.isDisabled = true
-      } else if (val.length <= this.validations.maxDescriptionLength && this.inputForm.isDisabled == true) {
-        this.inputForm.isDisabled = false
+  validations() {
+    if (this.inputForm.isFree) {
+      return{
+        inputForm: {
+          name: {
+            required
+          },
+          description: {
+            maxLength: maxLength(1500)
+          }
+        }
+      }
+    } else {
+      return{
+        inputForm: {
+          price: {
+            required
+          },
+          name: {
+            required
+          },
+          description: {
+            maxLength: maxLength(1500)
+          }
+        }
       }
     }
   },
@@ -54,18 +81,18 @@ export default {
         </div>
       </div>
     </draggable>
-    <small class="text-secondary">İpucu: En az 3 fotoğraf ekle</small>
+    <small class="text-secondary" v-if="form.images.length <= 3">İpucu: En az 3 fotoğraf ekle</small>
     <div class="d-grid mt-3 mb-3">
       <button class="btn btn-letgo-outline" @click.prevent="$refs.fileInputComponent.$el.click()"><i class="fas fa-image"></i> Daha fazla fotoğraf ekle</button>
       <file-input ref="fileInputComponent"/>
     </div>
     <div class="row mt-4 off-product-form mb-4">
       <div class="col">
-        <input type="text" class="border-bottom-input" placeholder="Fiyat gir" v-if="!inputForm.isFree">
+        <input type="number" class="border-bottom-input" :class="{'border-bottom-error' : !$v.inputForm.price.required}" placeholder="Fiyat gir" v-model.trim="$v.inputForm.price.$model" v-if="!inputForm.isFree">
       </div>
       <div class="col">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" v-model="inputForm.isFree">
+          <input class="form-check-input" type="checkbox" v-model.trim="inputForm.isFree">
           <label class="form-check-label">
             Ücretsiz ver
           </label>
@@ -73,14 +100,14 @@ export default {
       </div>
     </div>
     <div class="mb-3">
-      <input type="text" class="border-bottom-input" placeholder="Ürün başlığı" v-model="inputForm.name">
+      <input type="text" class="border-bottom-input" :class="{'border-bottom-error' : !$v.inputForm.name.required}" placeholder="Ürün başlığı" v-model.trim="$v.inputForm.name.$model">
     </div>
     <div class="mb-3">
-      <textarea rows="5" class="border-bottom-input" placeholder="Açıklama (isteğe bağlı)" v-model="inputForm.description"></textarea>
+      <textarea rows="5" class="border-bottom-input" :class="{'border-bottom-error' : !$v.inputForm.description.maxLength}" placeholder="Açıklama (isteğe bağlı)" v-model.trim="$v.inputForm.description.$model"></textarea>
       <div class="text-end">{{inputForm.description.length}}/{{validations.maxDescriptionLength}}</div>
     </div>
     <div class="d-grid">
-      <button class="btn btn-letgo" :disabled="inputForm.isDisabled" @click.prevent="">Onayla</button>
+      <button class="btn btn-letgo" :disabled="inputForm.isDisabled || $v.inputForm.$invalid" @click.prevent="onSubmitForm">Onayla</button>
     </div>
   </div>  
 </template>
