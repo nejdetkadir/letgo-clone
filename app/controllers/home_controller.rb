@@ -2,6 +2,5 @@
 
 class HomeController < ApplicationController
   def index
-    @categories_data = Category.active
   end
 end

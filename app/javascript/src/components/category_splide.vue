@@ -52,7 +52,7 @@ export default {
     cursor: pointer;
   }
 
-  .card-body > i{
+  .category-card > .card-body > i{
     font-size: 36px;
   }
 
