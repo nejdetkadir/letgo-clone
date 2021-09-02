@@ -1,4 +1,5 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/fcb1a4c12f8c4c3b844e2a617a3744b6)](https://www.codacy.com/gh/nejdetkadir/letgo-clone/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nejdetkadir/letgo-clone&amp;utm_campaign=Badge_Grade)
+![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)
 
 # Letgo Clone
 It is a clone application of [Letgo](https://www.letgo.com/), created with Ruby on Rails & VueJS
