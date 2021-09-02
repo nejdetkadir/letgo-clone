@@ -1,14 +1,13 @@
 import Vue from "vue/dist/vue.esm";
 import Vuex from "vuex";
+import product from "./modules/product";
 
 Vue.use(Vuex);
 
-
 const store = new Vuex.Store({
-  state: {
-    message: "Hello rails from vuex!"
-  },
-  modules: {}
+  modules: {
+    product
+  }
 });
 
 export default store;
