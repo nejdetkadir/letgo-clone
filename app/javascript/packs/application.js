@@ -28,6 +28,9 @@ Vue.use(TurbolinksAdapter);
 import search_bar from "../src/components/search_bar";
 Vue.component("search-bar", search_bar)
 
+import category_splide from "../src/components/category_splide";
+Vue.component("category-splide", category_splide);
+
 document.addEventListener("turbolinks:load", () => {
   new Vue({
     store
