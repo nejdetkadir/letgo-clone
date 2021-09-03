@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  
+  # FriendlyId
+  extend FriendlyId
+  friendly_id :email, use: :slugged
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :omniauthable, omniauth_providers: [:google_oauth2, :github, :facebook]
 
