@@ -1,8 +1,10 @@
 <script>
-import {mapState} from "vuex";
+import {mapState, mapMutations} from "vuex";
 import draggable from "vuedraggable";
 import fileInput from "./file_input.vue";
 import { required, maxLength } from "vuelidate/lib/validators";
+import Rails from "@rails/ujs";
+import {products} from "../../utils/routes";
 
 export default {
   data() {
@@ -12,7 +14,7 @@ export default {
         isFree: false,
         name: "",
         description: "",
-        isDisabled: false
+        isDisabled: false,
       },
       validations: {
         maxDescriptionLength: 1500,
@@ -23,13 +25,45 @@ export default {
     ...mapState("product", ["form"])
   },
   methods: {
+    ...mapMutations("product", ["nextStep", "changeSavedStatus", "changeLoadingStatus"]),
     handleImage(file) {
       return URL.createObjectURL(file)
+    },
+    handleFormData() {
+      const data = new FormData();
+
+      data.append("product[name]", this.inputForm.name);
+      data.append("product[description]", this.inputForm.description);
+      data.append("product[price]", this.inputForm.isFree ? "0" : this.inputForm.price);
+      data.append("product[category_id]", this.form.categoryId);
+      this.form.images.forEach(image => {
+        data.append("product[images][]", image);
+      });
+      
+      return data;
     },
     onSubmitForm() {
       this.$v.$touch()
       if (!this.$v.$invalid) {
-        window.console.log("sendFormAction")
+        this.changeLoadingStatus(); // loading: true
+        
+        Rails.ajax({
+          beforeSend: () => true,
+          url: products.create.path,
+          type: products.create.type,
+          dataType: "json",
+          data: this.handleFormData(),
+          success: (res) => {
+            if (res.slug != undefined) {
+              this.changeSavedStatus(res.id);
+              this.nextStep();
+            } else {
+              window.console.log(res);
+            }
+
+            this.changeLoadingStatus(); // loading: false
+          }
+        });
       }
     }
   },
@@ -107,13 +141,13 @@ export default {
       <div class="text-end">{{inputForm.description.length}}/{{validations.maxDescriptionLength}}</div>
     </div>
     <div class="d-grid">
-      <button class="btn btn-letgo" :disabled="inputForm.isDisabled || $v.inputForm.$invalid" @click.prevent="onSubmitForm">Onayla</button>
+      <button class="btn btn-letgo" :disabled="inputForm.isDisabled || $v.inputForm.$invalid || form.isLoading" @click.prevent="onSubmitForm">{{form.isLoading ? "Yükleniyor" : "Onayla"}}</button>
     </div>
   </div>  
 </template>
 
 <style>
-.off-product-draggable-image > .card > .card-img-overlay > .card-title{
+  .off-product-draggable-image > .card > .card-img-overlay > .card-title{
     background-color: rgba(0, 0, 0, 0.56);
     color: white;
     border-radius: 50px;

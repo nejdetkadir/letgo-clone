@@ -3,7 +3,7 @@ authenticate :user do
     # get '/', to: 'home#index', as: 'root'
 
     scope 'ilan', as: 'product' do
-      get '/yeni', to: 'products#create', as: 'create'
+      post '/yeni', to: 'products#create', as: 'create'
     end
   end
 end
