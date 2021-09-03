@@ -1,0 +1,46 @@
+.row.mt-5
+  .col-md-8.mx-auto
+    .row
+      .col-4.border-end
+        .d-flex.justify-content-around.align-items-center
+          = image_tag "90x90.png", class: "rounded-circle"
+          .d-block
+            h1.fs-6 #{current_user.email.split("@").first}
+            small Değerlendirme yok
+            p City
+      .col-4
+        .text-center
+          h6 Şununla doğrulandı:
+          - if current_user.provider.eql? "normal"
+            = icon "fas", "envelope", class: "fs-4"
+          - elsif current_user.provider.eql? "github"
+            = icon "fab", "github", class: "fs-4"
+          - else
+            = icon "fab", "google", class: "fs-4"
+      .col-4
+        .d-flex.justify-content-end.align-items-center
+          = icon "fas", "share-alt", class: "fs-4 me-4 cursorable p-2"
+          = icon "fas", "cog", class: "fs-4 cursorable p-2"
+    ul#pills-profile-tab.nav.nav-pills.mb-3.mt-4(role='tablist')
+      li.nav-item(role='presentation')
+        button#pills-selling-tab.nav-link.active(data-bs-toggle='pill' data-bs-target='#pills-selling' type='button' role='tab' aria-controls='pills-selling' aria-selected='true') Satıyor
+      li.nav-item(role='presentation')
+        button#pills-sold-tab.nav-link(data-bs-toggle='pill' data-bs-target='#pills-sold' type='button' role='tab' aria-controls='pills-sold' aria-selected='false') Satıldı
+      li.nav-item(role='presentation')
+        button#pills-favorites-tab.nav-link(data-bs-toggle='pill' data-bs-target='#pills-favorites' type='button' role='tab' aria-controls='pills-favorites' aria-selected='false') Favoriler
+    #pills-profile-tabContent.tab-content
+      #pills-selling.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='pills-selling-tab')
+        - if current_user.products.selling.count == 0
+          .mt-5
+            h4.text-center.text-secondary
+              | (HENÜZ!) İLAN YOK
+      #pills-sold.tab-pane.fade(role='tabpanel' aria-labelledby='pills-sold-tab')
+        - if current_user.products.sold.count == 0
+          .mt-5
+            h4.text-center.text-secondary
+              | (HENÜZ!) İLAN YOK
+      #pills-favorites.tab-pane.fade(role='tabpanel' aria-labelledby='pills-favorites-tab')
+        - if current_user.products.removed.count == 0
+          .mt-5
+            h4.text-center.text-secondary
+              | (HENÜZ!) FAVORİ YOK

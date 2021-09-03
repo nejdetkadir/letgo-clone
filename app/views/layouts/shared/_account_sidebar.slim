@@ -26,7 +26,7 @@
         = icon "fas", "shield-alt", class: "pe-2"
         .fw-normal Gizlilik Politikası
       - if user_signed_in?
-        = link_to edit_user_registration_path, class: "list-group-item list-group-item-action" do
+        = link_to membership_root_path, class: "list-group-item list-group-item-action" do
           = icon "fas", "user", class: "pe-2"
           .fw-normal Profilim
         = link_to destroy_user_session_path, class: "list-group-item list-group-item-action", method: :delete do
