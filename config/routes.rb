@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   root  to:'home#index'
 
   # kategori
-  get '/kategori/:id', to: "categories#show", as: :category_show
+  get '/kategori/:slug', to: "categories#show", as: :category_show
+  get '/ilan/:slug', to: "products#show", as: :product_show
 
   # errors
   get '/404', to: 'errors#not_found', as: :not_found
