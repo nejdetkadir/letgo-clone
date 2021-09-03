@@ -6,6 +6,9 @@ class User < ApplicationRecord
   after_initialize :set_default_role, :if => :new_record?
   after_initialize :set_default_provider, :if => :new_record?
 
+  # associations
+  has_many :products, dependent: :destroy
+
   # enumerables
   enum role: [:user, :admin]
   enum provider: [:google, :github, :facebook, :normal]
