@@ -21,6 +21,9 @@ class User < ApplicationRecord
   # mounts
   mount_uploader :profile_image, ProfileImageUploader
 
+  # validations
+  validates_presence_of [:fullname]
+
   def should_generate_new_friendly_id?
     email_changed?
   end

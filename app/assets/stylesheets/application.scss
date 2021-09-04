@@ -261,6 +261,18 @@ i.cursorable{
   }
 }
 
+.form-control{
+  &.floating{
+    background-color: rgb(245, 245, 245);
+    border: none;
+
+    &:focus{
+      background-color: white;
+      border: 1px solid #0000007a;
+    }
+  }
+}
+
 /*
 .turbolinks-progress-bar {
   background-color: rgb(255, 63, 85);

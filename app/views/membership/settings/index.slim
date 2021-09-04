@@ -11,17 +11,26 @@
       li.nav-item.col-4(role='presentation')
         button#pills-info-tab.nav-link.text-center.w-100(class="#{' active' if params[:tab].eql?("info")}" data-bs-toggle='pill' data-bs-target='#pills-info' type='button' role='tab' aria-controls='pills-info' aria-selected='false') Bilgilerin
     #pills-profile-settings-tabContent.tab-content
-      #pills-my-profile.tab-pane.fade(class="#{' show active' if params[:tab].eql?("profile") or params[:tab].nil?}" role='tabpanel' aria-labelledby='pills-my-profile-tab') profile
+      #pills-my-profile.tab-pane.fade(class="#{' show active' if params[:tab].eql?("profile") or params[:tab].nil?}" role='tabpanel' aria-labelledby='pills-my-profile-tab')
+        = form_for(current_user, url: membership_settings_informations_path, html: { method: :patch, id: "edit_user_information" }) do |f|
+          .form-floating.mb-3
+            = f.text_field :fullname, class: "form-control floating", placeholder: "Adın"
+            = f.label "Mevcut şifre"
+          .form-floating.mb-3
+            = f.email_field :email, class: "form-control floating", placeholder: "E-posta"
+            = f.label "Yeni şifre"
+          .mb-3.d-grid
+            = f.submit "Değişiklikleri kaydet", class: "btn btn-letgo fw-bold"
       #pills-password.tab-pane.fade(class="#{' show active' if params[:tab].eql?("password")}" role='tabpanel' aria-labelledby='pills-password-tab')
         = form_for(current_user, url: registration_path(:user), html: { method: :put }) do |f|
           .form-floating.mb-3
-            = f.password_field :current_password, class: "form-control", placeholder: "Mevcut şifre"
+            = f.password_field :current_password, class: "form-control floating", placeholder: "Mevcut şifre"
             = f.label "Mevcut şifre"
           .form-floating.mb-3
-            = f.password_field :password, class: "form-control", placeholder: "Yeni şifre"
+            = f.password_field :password, class: "form-control floating", placeholder: "Yeni şifre"
             = f.label "Yeni şifre"
           .form-floating.mb-3
-            = f.password_field :password_confirmation, class: "form-control", placeholder: "Şifreyi onayla"
+            = f.password_field :password_confirmation, class: "form-control floating", placeholder: "Şifreyi onayla"
             = f.label "Şifreyi onayla"
           .mb-3.d-grid
             = f.submit "Değişiklikleri kaydet", class: "btn btn-letgo fw-bold"

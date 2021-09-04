@@ -8,7 +8,7 @@
 
 # Categories
 
-User.create(email: "nejdetkadir.550@gmail.com", password: "123456789")
+User.create(email: "nejdetkadir.550@gmail.com", password: "123456789", fullname: "Nejdet Kadir Bektaş")
 
 Category.create(name: "Elektronik", icon: "fas-mobile", color: "#6bcebb")
 Category.create(name: "Spor, Eğlence ve Oyunlar", icon: "fas-basketball-ball", color: "#a3ce71")
