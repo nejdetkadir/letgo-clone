@@ -1,0 +1,14 @@
+.row
+  .col-md-6.mx-auto
+    .d-flex.align-items-center.justify-content-between
+      = link_to :back do
+        = icon "fas", "arrow-left", class: "text-muted fs-4"
+      h2.text-center.fw-bold Hesabı sil
+    hr
+    p
+      small.text-muted
+        | Hesabını silme işlemi son adımdır ve bu işlemle tüm letgo bilgilerin de silinir.
+        | Ancak letgo, verilerin bir kısmını yasalara uygun olarak sınırlı süre içerisinde saklama hakkına sahiptir.
+        | Hesabın hemen kapatılacak ve letgo verilerin hesabın ile birlikte silinecektir. Hesabın silindikten sonra yeni bir hesap açmadıkça letgo'ya giriş yapamazsın.
+    = link_to "Hesabı sil", registration_path(:user), class: "btn btn-letgo fw-bold", data: { confirm: "Emin misin?" }, method: :delete
+    = link_to "Hayır, bilgilerim kalsın", :back, class: "btn btn-letgo-outline fw-bold ms-3"

@@ -34,4 +34,10 @@
             = f.label "Şifreyi onayla"
           .mb-3.d-grid
             = f.submit "Değişiklikleri kaydet", class: "btn btn-letgo fw-bold"
-      #pills-info.tab-pane.fade(class="#{' show active' if params[:tab].eql?("info")}" role='tabpanel' aria-labelledby='pills-info-tab') info
+      #pills-info.tab-pane.fade(class="#{' show active' if params[:tab].eql?("info")}" role='tabpanel' aria-labelledby='pills-info-tab')
+        = link_to membership_settings_informations_cancel_path, class: "d-flex justify-content-between align-items-center border-bottom pb-3 mt-5" do
+          .fw-bold Hesabı sil
+          = icon "fas", "chevron-right"
+        = link_to membership_settings_informations_data_path, class: "d-flex justify-content-between align-items-center border-bottom pb-3 pt-3" do
+          .fw-bold letgo bilgilerine ulaş
+          = icon "fas", "chevron-right"

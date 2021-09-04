@@ -3,7 +3,7 @@
     .row
       .col-4.border-end
         .d-flex.justify-content-around.align-items-center
-          = image_tag "90x90.png", class: "rounded-circle"
+          = image_tag current_user.profile_image_url(:thumb), class: "rounded-circle img-thumbnail"
           .d-block
             h1.fs-6 #{current_user.email.split("@").first}
             small Değerlendirme yok

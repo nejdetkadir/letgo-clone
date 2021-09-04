@@ -19,6 +19,12 @@ class Membership::SettingsController < MembershipController
     redirect_to membership_settings_root_path
   end
 
+  def cancel
+  end
+
+  def data
+  end
+
   private
 
   def profile_image_params

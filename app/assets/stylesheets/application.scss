@@ -273,6 +273,14 @@ i.cursorable{
   }
 }
 
+#pills-info{
+  .d-flex{
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+  }
+}
+
 /*
 .turbolinks-progress-bar {
   background-color: rgb(255, 63, 85);
