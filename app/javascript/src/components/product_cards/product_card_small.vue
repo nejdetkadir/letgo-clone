@@ -20,7 +20,8 @@ export default {
       deleteModalShowing: false
     }
   },
-  props: ["product_data", "category_data"],
+  // card_type == 1 admin | card_type == 2 any user
+  props: ["product_data", "category_data", "card_type"],
   components: {
     Splide,
     SplideSlide
@@ -99,9 +100,9 @@ export default {
       <small>{{category.name}}</small>
       <h5 class="fw-bold mt-2">{{product.price == "0.0" ? "Ücretsiz" : `${product.price} TL`}}</h5>
       <div class="d-grid mt-2">
-        <button class="btn btn-letgo-outline"  v-if='this.product.status == "selling"' @click.prevent="goToEditPage">Düzelt</button>
+        <button class="btn btn-letgo-outline"  v-if='product.status == "selling" && card_type == 1' @click.prevent="goToEditPage">Düzelt</button>
       </div>
-      <div class="text-center edit-area mt-2" v-if='this.product.status == "selling"'>
+      <div class="text-center edit-area mt-2" v-if='product.status == "selling" && card_type == 1'>
         <div class="btn-group dropup">
           <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
             Daha fazla seçenek
@@ -122,7 +123,7 @@ export default {
           </ul>
         </div>
       </div>
-      <div v-if="deleteModalShowing" tabindex="-1" role="dialog" class="modal modal-alert show d-block" aria-modal="true">
+      <div v-if="deleteModalShowing && card_type == 1" tabindex="-1" role="dialog" class="modal modal-alert show d-block" aria-modal="true">
         <div class="modal-dialog modal-dialog-centered delete-product-modal-dialog">
           <div class="modal-content rounded-4 shadow">
             <div class="modal-header border-bottom-0">

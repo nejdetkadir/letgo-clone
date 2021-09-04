@@ -32,12 +32,14 @@
     #pills-profile-tab-content.tab-content
       .row
         - if params[:tab].eql?("favorites")
-          - if current_user.products.sold.count == 0
+          - if current_user.favorites.count == 0
             .mt-5
               h4.text-center.text-secondary
                 | (HENÜZ!) İLAN YOK
           - else
-            h1 favorites
+            - current_user.favorites.each do |favorite|
+              .col-lg-4.col-md-6.mt-3
+                product-card-small(product_data="#{favorite.product.to_json}" category_data="#{favorite.product.category.to_json}" card_type="2")
         - elsif params[:tab].eql?("sold")
           - if current_user.products.sold.count == 0
             .mt-5
@@ -46,7 +48,7 @@
           - else
             - current_user.products.sold.each do |product|
               .col-lg-4.col-md-6.mt-3
-                product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}")
+                product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}" card_type="1")
         - else
           - if current_user.products.selling.count == 0
             .mt-5
@@ -55,4 +57,4 @@
           - else
             - current_user.products.selling.each do |product|
               .col-lg-4.col-md-6.mt-3
-                product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}")
+                product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}" card_type="1")

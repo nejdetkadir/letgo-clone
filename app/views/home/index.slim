@@ -1,12 +1,6 @@
 h1.text-center.mb-4.fs-2.fw-bold Kullanmadığın eşyaları sat, çevrendeki fırsatları keşfet!
 category-splide(categories_data="#{active_categories.to_json}")
-.mt-5
-  h1 Welcome#index
-  p Find me in app/views/welcome/index.slim
-  - if user_signed_in?
-    pre #{current_user.as_json}
-    = link_to t('sessions.destroy.title'), destroy_user_session_path, method: :delete
-  - else
-    = link_to t('sessions.new.title'), new_user_session_path
-    br
-    = link_to t('registrations.new.title'), new_user_registration_path
+.row.mt-5
+  - @products.each do |product|
+    .col-lg-3.col-md-6.mt-3
+      product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}" card_type="2")
