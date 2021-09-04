@@ -21,6 +21,10 @@ class Product < ApplicationRecord
   # enumerables
   enum status: [:selling, :sold, :removed]
 
+  def should_generate_new_friendly_id?
+    name_changed?
+  end
+
   def set_cover
     self.cover = self.images.first
   end

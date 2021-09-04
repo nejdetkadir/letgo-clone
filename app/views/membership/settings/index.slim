@@ -1,5 +1,28 @@
 .row
-  .col-md-8.mx-auto
+  .col-md-6.mx-auto
     h2.text-center.fw-bold Ayarlar
     hr
     profile-image-input(img="#{current_user.profile_image_url(:thumb)}")
+    ul#pills-profile-tab.nav.nav-pills.mb-3.mt-4(role='tablist')
+      li.nav-item.col-4(role='presentation')
+        button#pills-my-profile-tab.nav-link.text-center.w-100(class="#{' active' if params[:tab].eql?("profile") or params[:tab].nil?}" data-bs-toggle='pill' data-bs-target='#pills-my-profile' type='button' role='tab' aria-controls='pills-my-profile' aria-selected='true') Profil
+      li.nav-item.col-4(role='presentation')
+        button#pills-password-tab.nav-link.text-center.w-100(class="#{' active' if params[:tab].eql?("password")}" data-bs-toggle='pill' data-bs-target='#pills-password' type='button' role='tab' aria-controls='pills-password' aria-selected='false') Şifre
+      li.nav-item.col-4(role='presentation')
+        button#pills-info-tab.nav-link.text-center.w-100(class="#{' active' if params[:tab].eql?("info")}" data-bs-toggle='pill' data-bs-target='#pills-info' type='button' role='tab' aria-controls='pills-info' aria-selected='false') Bilgilerin
+    #pills-profile-settings-tabContent.tab-content
+      #pills-my-profile.tab-pane.fade(class="#{' show active' if params[:tab].eql?("profile") or params[:tab].nil?}" role='tabpanel' aria-labelledby='pills-my-profile-tab') profile
+      #pills-password.tab-pane.fade(class="#{' show active' if params[:tab].eql?("password")}" role='tabpanel' aria-labelledby='pills-password-tab')
+        = form_for(current_user, url: registration_path(:user), html: { method: :put }) do |f|
+          .form-floating.mb-3
+            = f.password_field :current_password, class: "form-control", placeholder: "Mevcut şifre"
+            = f.label "Mevcut şifre"
+          .form-floating.mb-3
+            = f.password_field :password, class: "form-control", placeholder: "Yeni şifre"
+            = f.label "Yeni şifre"
+          .form-floating.mb-3
+            = f.password_field :password_confirmation, class: "form-control", placeholder: "Şifreyi onayla"
+            = f.label "Şifreyi onayla"
+          .mb-3.d-grid
+            = f.submit "Değişiklikleri kaydet", class: "btn btn-letgo fw-bold"
+      #pills-info.tab-pane.fade(class="#{' show active' if params[:tab].eql?("info")}" role='tabpanel' aria-labelledby='pills-info-tab') info

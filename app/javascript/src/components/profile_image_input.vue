@@ -57,7 +57,7 @@ export default {
 
 <template>
   <div class="row">
-    <div class="col-md-6 mx-auto">
+    <div class="col-md-8 mx-auto">
       <input type="file" ref="profileImageInput" class="d-none" :accept="supportedImageTypes" @input="checkImage">
       <div class="d-flex justify-content-center align-items-center mt-4 update-profile-picture-area" @click.prevent="$refs.profileImageInput.click()">
         <img :src="imgSrc" class="rounded-circle img-thumbnail">

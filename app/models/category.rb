@@ -7,6 +7,10 @@ class Category < ApplicationRecord
   # scopes
   scope :active, -> { where(is_public: true)}
 
+  def should_generate_new_friendly_id?
+    name_changed?
+  end
+
   def as_json(*_args)
     {
       id: id,

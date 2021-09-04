@@ -21,6 +21,10 @@ class User < ApplicationRecord
   # mounts
   mount_uploader :profile_image, ProfileImageUploader
 
+  def should_generate_new_friendly_id?
+    email_changed?
+  end
+
   def as_json(*_args)
     {
       id: id,
