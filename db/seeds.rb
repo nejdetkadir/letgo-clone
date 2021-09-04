@@ -8,8 +8,6 @@
 
 # Categories
 
-User.create(email: "nejdetkadir.550@gmail.com", password: "123456789", fullname: "Nejdet Kadir Bektaş")
-
 Category.create(name: "Elektronik", icon: "fas-mobile", color: "#6bcebb")
 Category.create(name: "Spor, Eğlence ve Oyunlar", icon: "fas-basketball-ball", color: "#a3ce71")
 Category.create(name: "Araba", icon: "fas-car", color: "#327fb6")
@@ -20,16 +18,29 @@ Category.create(name: "Bebek ve Çocuk", icon: "fas-baby-carriage", color: "#20c
 Category.create(name: "Film, Kitap ve Müzik", icon: "fas-headphones", color: "#ec7ebd")
 Category.create(name: "Diğer", icon: "fab-buffer", color: "#e1c340")
 
-10.times {
-  User.last.products.create(
-    name: Faker::Book.title,
-    category: Category.active.sample,
-    description: Faker::Lorem.sentence,
-    price: "1500.00",
-    remote_images_urls: [
-      Faker::LoremFlickr.image(size: "800x800"),
-      Faker::LoremFlickr.image(size: "800x800"),
-      Faker::LoremFlickr.image(size: "800x800")
-    ]
+user_progress_bar = ProgressBar.create(:title => "Fake users creating with products", :starting_at => 0, :total => 10)
+
+10.times do |user|
+  User.create(
+    email: user == 0 ? "nejdetkadir.550@gmail.com" : Faker::Internet.email,
+    password: "123456789",
+    fullname: Faker::Name.name
   )
-}
+
+  10.times {
+    User.last.products.create(
+      name: Faker::Commerce.product_name,
+      category: Category.active.sample,
+      description: Faker::Lorem.sentence,
+      price: Faker::Commerce.price,
+      remote_images_urls: [
+        Faker::LoremPixel.image(size: "800x800"),
+        Faker::LoremPixel.image(size: "800x800"),
+        Faker::LoremPixel.image(size: "800x800"),
+        Faker::LoremPixel.image(size: "800x800"),
+      ]
+    )
+  }
+
+  user_progress_bar&.increment
+end
