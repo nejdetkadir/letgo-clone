@@ -27,12 +27,9 @@ Category.create(name: "Diğer", icon: "fab-buffer", color: "#e1c340")
     description: Faker::Lorem.sentence,
     price: "1500.00",
     remote_images_urls: [
-      Faker::Avatar.image(slug: Faker::Book.title, size: "800x800", format: "jpg"),
-      Faker::Avatar.image(slug: Faker::Book.title, size: "800x800", format: "jpg"),
-      Faker::Avatar.image(slug: Faker::Book.title, size: "800x800", format: "jpg"),
-      Faker::Avatar.image(slug: Faker::Book.title, size: "800x800", format: "jpg"),
-      Faker::Avatar.image(slug: Faker::Book.title, size: "800x800", format: "jpg"),
-      Faker::Avatar.image(slug: Faker::Book.title, size: "800x800", format: "jpg"),
+      Faker::LoremFlickr.image(size: "800x800"),
+      Faker::LoremFlickr.image(size: "800x800"),
+      Faker::LoremFlickr.image(size: "800x800")
     ]
   )
 }

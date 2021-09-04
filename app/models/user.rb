@@ -18,6 +18,9 @@ class User < ApplicationRecord
   enum role: [:user, :admin]
   enum provider: [:google, :github, :facebook, :normal]
 
+  # mounts
+  mount_uploader :profile_image, ProfileImageUploader
+
   def as_json(*_args)
     {
       id: id,
