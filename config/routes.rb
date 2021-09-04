@@ -11,7 +11,15 @@ Rails.application.routes.draw do
 
   # kategori
   get '/kategori/:slug', to: "categories#show", as: :category_show
-  get '/ilan/:slug', to: "products#show", as: :product_show
+
+  scope 'ilan', as: 'product' do
+    get '/:slug', to: "products#show", as: :show
+    authenticate :user do
+      # favorites
+      get '/:slug/favori', to: "products#favorite", as: :favorite
+      delete '/:slug/favori', to: "products#unfavorite", as: :unfavorite
+    end
+  end
 
   # errors
   get '/404', to: 'errors#not_found', as: :not_found
