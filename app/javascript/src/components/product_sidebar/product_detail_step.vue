@@ -5,6 +5,8 @@ import fileInput from "./file_input.vue";
 import { required, maxLength } from "vuelidate/lib/validators";
 import Rails from "@rails/ujs";
 import {products} from "../../utils/routes";
+import {handleFormData} from "../../utils/helpers";
+import toastr from "toastr";
 
 export default {
   data() {
@@ -29,19 +31,6 @@ export default {
     handleImage(file) {
       return URL.createObjectURL(file)
     },
-    handleFormData() {
-      const data = new FormData();
-
-      data.append("product[name]", this.inputForm.name);
-      data.append("product[description]", this.inputForm.description);
-      data.append("product[price]", this.inputForm.isFree ? "0" : this.inputForm.price);
-      data.append("product[category_id]", this.form.categoryId);
-      this.form.images.forEach(image => {
-        data.append("product[images][]", image);
-      });
-      
-      return data;
-    },
     onSubmitForm() {
       this.$v.$touch()
       if (!this.$v.$invalid) {
@@ -52,13 +41,32 @@ export default {
           url: products.create.path,
           type: products.create.type,
           dataType: "json",
-          data: this.handleFormData(),
+          data: handleFormData("product",
+            [
+              {
+                name: this.inputForm.name
+              },
+              {
+                description: this.inputForm.description
+              },
+              {
+                price: this.inputForm.isFree ? "0" : this.inputForm.price
+              },
+              {
+                category_id: this.form.categoryId
+              },
+              {
+                images: this.form.images
+              }
+            ],
+            "images"
+          ),
           success: (res) => {
             if (res.slug != undefined) {
               this.changeSavedStatus(res.id);
               this.nextStep();
             } else {
-              window.console.log(res);
+              toastr.error("Bir hata meydana geldi.")
             }
 
             this.changeLoadingStatus(); // loading: false

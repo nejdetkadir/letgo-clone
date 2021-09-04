@@ -3,6 +3,7 @@ import {Splide, SplideSlide} from "@splidejs/vue-splide";
 import {products} from "../../utils/routes";
 import Rails from "@rails/ujs";
 import toastr from "toastr";
+import {handleFormData} from "../../utils/helpers";
 
 export default {
   data() {
@@ -31,18 +32,19 @@ export default {
     goToEditPage() {
       window.location.href = products.view.edit.replace("ID", this.product.id)
     },
-    handleFormData(status) {
-      let data = new FormData();
-      data.append("product[status]", status);
-      return data;
-    },
     changeProductStatus(status) {
       Rails.ajax({
         beforeSend: () => true,
         url: products.change_status.path.replace("ID", this.product.id),
         type: products.change_status.type,
         dataType: "json",
-        data: this.handleFormData(status),
+        data: handleFormData("product",
+          [
+            {
+              status
+            }
+          ]
+        ),
         success: (res) => {
           if (res.status == status) {
             this.product.status = status;
