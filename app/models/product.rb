@@ -13,6 +13,7 @@ class Product < ApplicationRecord
   # associations
   belongs_to :user
   belongs_to :category
+  has_many :favorites, dependent: :destroy
 
   # custom callbacks
   after_initialize :set_default_status, :if => :new_record?
