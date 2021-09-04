@@ -22,25 +22,36 @@
           = icon "fas", "share-alt", class: "fs-4 me-4 cursorable p-2"
           = icon "fas", "cog", class: "fs-4 cursorable p-2"
     ul#pills-profile-tab.nav.nav-pills.mb-3.mt-4(role='tablist')
-      li.nav-item(role='presentation')
-        button#pills-selling-tab.nav-link.active(data-bs-toggle='pill' data-bs-target='#pills-selling' type='button' role='tab' aria-controls='pills-selling' aria-selected='true') Satıyor
-      li.nav-item(role='presentation')
-        button#pills-sold-tab.nav-link(data-bs-toggle='pill' data-bs-target='#pills-sold' type='button' role='tab' aria-controls='pills-sold' aria-selected='false') Satıldı
-      li.nav-item(role='presentation')
-        button#pills-favorites-tab.nav-link(data-bs-toggle='pill' data-bs-target='#pills-favorites' type='button' role='tab' aria-controls='pills-favorites' aria-selected='false') Favoriler
-    #pills-profile-tabContent.tab-content
-      #pills-selling.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='pills-selling-tab')
-        - if current_user.products.selling.count == 0
-          .mt-5
-            h4.text-center.text-secondary
-              | (HENÜZ!) İLAN YOK
-      #pills-sold.tab-pane.fade(role='tabpanel' aria-labelledby='pills-sold-tab')
-        - if current_user.products.sold.count == 0
-          .mt-5
-            h4.text-center.text-secondary
-              | (HENÜZ!) İLAN YOK
-      #pills-favorites.tab-pane.fade(role='tabpanel' aria-labelledby='pills-favorites-tab')
-        - if current_user.products.removed.count == 0
-          .mt-5
-            h4.text-center.text-secondary
-              | (HENÜZ!) FAVORİ YOK
+      li.nav-item
+        = link_to "Satıyor", membership_root_path(tab: "selling"), class: "nav-link#{' active' if params[:tab].eql?("selling") or params[:tab].nil?}"
+      li.nav-item
+        = link_to "Satıldı", membership_root_path(tab: "sold"), class: "nav-link#{' active' if params[:tab].eql?("sold")}"
+      li.nav-item
+        = link_to "Favoriler", membership_root_path(tab: "favorites"), class: "nav-link#{' active' if params[:tab].eql?("favorites")}"
+    #pills-profile-tab-content.tab-content
+      .row
+        - if params[:tab].eql?("favorites")
+          - if current_user.products.sold.count == 0
+            .mt-5
+              h4.text-center.text-secondary
+                | (HENÜZ!) İLAN YOK
+          - else
+            h1 favorites
+        - elsif params[:tab].eql?("sold")
+          - if current_user.products.sold.count == 0
+            .mt-5
+              h4.text-center.text-secondary
+                | (HENÜZ!) İLAN YOK
+          - else
+            - current_user.products.sold.each do |product|
+              .col-lg-4.col-md-6.mt-3
+                product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}")
+        - else
+          - if current_user.products.selling.count == 0
+            .mt-5
+              h4.text-center.text-secondary
+                | (HENÜZ!) FAVORİ YOK
+          - else
+            - current_user.products.selling.each do |product|
+              .col-lg-4.col-md-6.mt-3
+                product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}")

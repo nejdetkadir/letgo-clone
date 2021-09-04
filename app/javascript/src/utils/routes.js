@@ -3,9 +3,20 @@ const products = {
     path: "/uyelik/ilan/yeni",
     type: "POST"
   },
+  change_status: {
+    path: "uyelik/ilan/ID",
+    type: "POST"
+  },
   view: {
-    show: "/ilan/"
+    show: "/ilan/",
+    edit: "/uyelik/ilan/ID/duzenle"
   }
 }
 
-module.exports = {products}
+const categories = {
+  view: {
+    show: "/kategori/"
+  }
+}
+
+module.exports = {products, categories}

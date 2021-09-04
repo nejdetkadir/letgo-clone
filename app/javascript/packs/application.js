@@ -36,6 +36,9 @@ Vue.component("category-splide", category_splide);
 import product_sidebar from "../src/components/product_sidebar";
 Vue.component("product-sidebar", product_sidebar);
 
+import product_card_small from "../src/components/product_cards/product_card_small";
+Vue.component("product-card-small", product_card_small);
+
 document.addEventListener("turbolinks:load", () => {
   new Vue({
     store

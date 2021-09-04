@@ -14,6 +14,7 @@
 <script>
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+import {categories} from "../utils/routes";
 
 export default {
   data() {
@@ -38,7 +39,7 @@ export default {
       return icon.substring(0, 3) + " fa" + icon.substring(3, icon.length)
     },
     linkTo(slug) {
-      window.location.href = `/kategori/${slug}`
+      window.location.href = categories.view.show + slug;
     }
   }
 }

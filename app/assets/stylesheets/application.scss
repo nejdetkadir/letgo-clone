@@ -202,7 +202,7 @@ i.cursorable{
   border-bottom: 1px solid rgb(221, 221, 221);
 
   li{
-    button{
+    .nav-link{
       border-radius: 0;
       font-weight: 400;
       color: black;
@@ -216,3 +216,53 @@ i.cursorable{
     }
   }
 }
+
+.product-card-small{
+  border-radius: 10px !important;
+  border: none !important;
+
+  img{
+    cursor: pointer;
+  }
+
+  .card-title{
+    cursor: pointer;
+  }
+
+  .edit-area{
+    button{
+      font-weight: bold;
+      color: rgb(148, 148, 148);
+      border-radius: 20px !important;
+      
+      &:hover{
+        background-color: rgb(238, 238, 238);
+      }
+    }
+    
+    ul.dropdown-menu{
+      min-width: 7rem;
+      padding: 0;
+
+      li{
+        padding: 10px;
+        cursor: pointer;
+
+        &:active{
+          color: #1e2125;
+          background-color: #e9ecef;
+        }
+
+        i{
+          color: rgb(189, 189, 189);
+        }
+      }
+    }
+  }
+}
+
+/*
+.turbolinks-progress-bar {
+  background-color: rgb(255, 63, 85);
+}
+*/
