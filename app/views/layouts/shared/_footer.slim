@@ -1,0 +1,26 @@
+footer
+  .container.py-5
+    .row
+      .col-12.col-md
+        = image_tag "letgo-logo-white-small.png", height: "80"
+        small.d-block.mt-3.text-white.fw-bold © #{Setting.title.downcase} #{Time.now.year}
+      .col-6.col-md
+        h5 Uygulamayı indir
+        ul.list-unstyled.text-small
+          li.mt-3
+            = link_to Setting.app_store_url, target: "_blank" do
+              = image_tag "footer_app_store.svg", height: "35"
+          li.mt-2
+            = link_to Setting.google_play_url, target: "_blank" do
+              = image_tag "footer_google_play.svg", height: "35"
+      .col-6.col-md
+        = image_tag "letgo-logo-white-small.png", height: "25"
+        ul.list-unstyled.text-small
+          li.mt-2
+            a.text-decoration-none.text-white(href='#') Hakkımızda
+          li
+            a.text-decoration-none.text-white(href='#') Şartlar ve Koşullar
+          li
+            a.text-decoration-none.text-white(href='#') Reklam Politikası
+          li
+            a.text-decoration-none.text-white(href='#') Gizlilik Politikası
