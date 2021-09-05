@@ -1,10 +1,13 @@
 #offcanvasAccount.offcanvas.offcanvas-end(tabindex='-1' aria-labelledby='offcanvasAccountLabel')
   .offcanvas-header
-    img(src="https://image.flaticon.com/icons/png/512/1946/1946429.png" height="72")
+    - if user_signed_in?
+      = image_tag current_user.profile_image_url(:thumb), height: "72"
+    - else
+      = image_tag "/images/fallback/user/thumb_default.jpg", height: "72"
     .mt-2
       - if user_signed_in?
-        = link_to edit_user_registration_path, class: "btn fw-normal text-white text-decoration-none p-0 text-start" do
-          .text-start #{current_user.email}
+        = link_to membership_settings_root_path, class: "btn fw-normal text-white text-decoration-none p-0 text-start" do
+          .text-start #{current_user.fullname}
           small.text-start Bandırma
       - else
         button.btn.fw-normal.text-white.text-decoration-none.p-0(type="button" data-bs-toggle="modal" data-bs-target="#authenticationModal")

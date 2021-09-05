@@ -1,1 +1,14 @@
-= @category.to_json
+nav(aria-label='breadcrumb')
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to "Anasayfa", root_path, class: "text-decoration-none text-muted"
+    li.breadcrumb-item.active(aria-current='page') #{@category.name}
+h1.fw-bold #{@category.name}: #{@products.count} ilan
+- if !@category.description.nil?
+  small.text-muted.mt-5 #{@category.description}
+.row.mt-5
+  - @products.each do |product|
+    .col-lg-3.col-md-6.mt-3
+      product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}" card_type="2")
+  .d-flex.justify-content-center.mt-5
+    = paginate @products
