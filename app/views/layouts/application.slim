@@ -1,5 +1,5 @@
 doctype html
-html
+html.h-100
   head
     title #{Setting.title.downcase}
     meta[name="viewport" content="width=device-width,initial-scale=1"]
@@ -8,8 +8,8 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application'
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-  body
-    div(data-behavior="vue")
+  body.d-flex.flex-column.h-100
+    .flex-shrink-0(data-behavior="vue")
       nav#navbar.navbar.navbar-expand-md.navbar-dark.fixed-top.shadow
         .container
           .col-2.text-center
