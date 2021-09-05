@@ -8,6 +8,7 @@
     "@rails/webpacker": "5.4.2",
     "@splidejs/vue-splide": "^0.3.5",
     "bootstrap": "^5.1.0",
+    "lightgallery.js": "^1.4.0",
     "toastr": "^2.1.4",
     "turbolinks": "^5.2.0",
     "vue": "^2.6.14",
