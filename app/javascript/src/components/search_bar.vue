@@ -1,4 +1,6 @@
 <script>
+import { isMobile } from 'mobile-device-detect';
+
 export default {
   data() {
     return{
@@ -35,6 +37,9 @@ export default {
     onSearch() {
       window.console.log("onSearch")
     },
+  },
+  mounted() {
+    console.log(isMobile)
   }
 }
 </script>

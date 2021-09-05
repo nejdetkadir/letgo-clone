@@ -1,20 +1,8 @@
-<template>
-  <splide :options="options" class="category-splide">
-    <splide-slide v-for="(category, index) in categories" :key="index" class="pe-1 ps-1">
-      <div class="card category-card" :style="{backgroundColor: category.color}" @click="linkTo(category.slug)">
-        <div class="card-body text-white text-center">
-          <i :class="handleIcon(category.icon)"></i>
-        </div>
-      </div>
-      <p class="mt-2 text-center">{{category.name}}</p>
-    </splide-slide>
-  </splide>
-</template>
-
 <script>
 import { Splide, SplideSlide } from '@splidejs/vue-splide';
 import '@splidejs/splide/dist/css/themes/splide-default.min.css';
 import {categories} from "../utils/routes";
+import { isMobile } from 'mobile-device-detect';
 
 export default {
   data() {
@@ -22,7 +10,7 @@ export default {
       categories: JSON.parse(this.categories_data),
       options: {
         type: 'loop',
-        perPage: 6,
+        perPage: isMobile ? 2 : 6,
         perMove: 1,
         pagination: false,
         autoplay: true
@@ -44,6 +32,19 @@ export default {
   }
 }
 </script>
+
+<template>
+  <splide :options="options" class="category-splide">
+    <splide-slide v-for="(category, index) in categories" :key="index" class="pe-1 ps-1">
+      <div class="card category-card" :style="{backgroundColor: category.color}" @click="linkTo(category.slug)">
+        <div class="card-body text-white text-center">
+          <i :class="handleIcon(category.icon)"></i>
+        </div>
+      </div>
+      <p class="mt-2 text-center">{{category.name}}</p>
+    </splide-slide>
+  </splide>
+</template>
 
 <style>
   .category-card{

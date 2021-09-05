@@ -27,8 +27,8 @@ Vue.use(Vuelidate)
 Vue.use(TurbolinksAdapter);
 
 // components
-import search_bar from "../src/components/search_bar";
-Vue.component("search-bar", search_bar)
+import navbar from "../src/components/navbar";
+Vue.component("custom-navbar", navbar)
 
 import category_splide from "../src/components/category_splide";
 Vue.component("category-splide", category_splide);
