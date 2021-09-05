@@ -7,6 +7,12 @@ class Category < ApplicationRecord
   # scopes
   scope :active, -> { where(is_public: true)}
 
+  # associations
+  has_many :products, dependent: :destroy
+
+  # validations
+  validates_presence_of [:name, :icon, :color]
+
   def should_generate_new_friendly_id?
     name_changed?
   end
