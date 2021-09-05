@@ -5,7 +5,7 @@
         .d-flex.justify-content-around.align-items-center
           = image_tag current_user.profile_image_url(:thumb), class: "rounded-circle img-thumbnail"
           .d-block
-            h1.fs-6 #{current_user.email.split("@").first}
+            h1.fs-6 #{current_user.fullname}
             small Değerlendirme yok
             p City
       .col-4
@@ -32,29 +32,35 @@
     #pills-profile-tab-content.tab-content
       .row
         - if params[:tab].eql?("favorites")
-          - if current_user.favorites.count == 0
+          - if @favorites.count == 0
             .mt-5
               h4.text-center.text-secondary
                 | (HENÜZ!) İLAN YOK
           - else
-            - current_user.favorites.each do |favorite|
+            - @favorites.each do |favorite|
               .col-lg-4.col-md-6.mt-3
                 product-card-small(product_data="#{favorite.product.to_json}" category_data="#{favorite.product.category.to_json}" card_type="2")
+            .d-flex.justify-content-center.mt-5
+              = paginate @favorites
         - elsif params[:tab].eql?("sold")
-          - if current_user.products.sold.count == 0
+          - if @sold.count == 0
             .mt-5
               h4.text-center.text-secondary
                 | (HENÜZ!) İLAN YOK
           - else
-            - current_user.products.sold.each do |product|
+            - @sold.each do |product|
               .col-lg-4.col-md-6.mt-3
                 product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}" card_type="1")
+            .d-flex.justify-content-center.mt-5
+              = paginate @sold
         - else
-          - if current_user.products.selling.count == 0
+          - if @selling.count == 0
             .mt-5
               h4.text-center.text-secondary
                 | (HENÜZ!) FAVORİ YOK
           - else
-            - current_user.products.selling.each do |product|
+            - @selling.each do |product|
               .col-lg-4.col-md-6.mt-3
                 product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}" card_type="1")
+            .d-flex.justify-content-center.mt-5
+              = paginate @selling
