@@ -1,1 +1,57 @@
-pre #{@product.to_json}
+nav(aria-label='breadcrumb')
+  ol.breadcrumb
+    li.breadcrumb-item
+      = link_to "Anasayfa", root_path, class: "text-decoration-none text-muted"
+    li.breadcrumb-item
+      = link_to @product.category.name, category_show_path(@product.category), class: "text-decoration-none text-muted"
+    li.breadcrumb-item.active(aria-current='page') #{@product.name}
+.row.mb-5
+  .col-md-8
+    product-images-card(images_data="#{@product.images.to_json}" product_name="#{@product.name}")
+    .d-flex.justify-content-between.align-items-center.mt-4
+      h2.fw-bolder
+        - if @product.price.eql?("0.0")
+          | Ücretsiz
+        - else
+          | #{@product.price} TL
+      .d-flex.align-items-center
+        = link_to product_favorite_path(@product), method: :post do
+          = icon "fas", "heart", class: "text-secondary me-4"
+        = link_to root_path do
+          = icon "fas", "share-alt", class: "text-secondary"
+    h3.fw-normal.mt-3 #{@product.name}
+    .d-flex.justify-content-between.align-items-center.mt-4
+      .d-flex.align-items-center
+        div  
+          = icon "fas", "clock", class: "text-secondary me-2"
+        .text-secondary 2 saat önce
+      .d-flex.align-items-center
+        .d-flex.align-items-center.me-4
+          = icon "fas", "eye", class: "text-secondary me-2"
+          .text-secondary #{@product.view_count}
+        .d-flex.align-items-center  
+          = icon "fas", "heart", class: "text-secondary me-2"
+          .text-secondary #{@product.favorites.count}
+    p.mt-3 #{@product.description}
+    p.mt-3.fw-bold Konum
+    iframe style="width: 100%; height: 350px" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyASt0RDO6juxBvZg1umbG1MeOao05iIJDY&q=Mevlana,Bafra,Samsun"
+  .col-md-4
+    .card
+      .card-body
+        = link_to root_path, class: "d-flex align-items-center justify-content-between text-decoration-none" do
+          = image_tag @product.user.profile_image_url(:thumb), class: "rounded-circle img-thumbnail"
+          .fw-bold.text-decoration-none.text-secondary #{@product.user.fullname}
+          .text-secondary
+            = icon "fas", "arrow-right"
+        .mt-3
+          p.mb-1 Satıcıya mesaj at:
+          .form-floating.mb-3
+            input.form-control.floating(placeholder="#{@product.user.fullname} ile mesajlaş")
+            label #{@product.user.fullname} ile mesajlaş
+          .d-grid
+            button.btn.btn-letgo.fw-bold Gönder
+.row.mb-5
+  h2.fw-bold Beğenbileceğin diğer ilanlar
+  - @like_products.each do |product|
+    .col-lg-3.col-md-6.mt-3
+      product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}" card_type="2")

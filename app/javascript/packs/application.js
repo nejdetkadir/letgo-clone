@@ -42,6 +42,9 @@ Vue.component("product-card-small", product_card_small);
 import profile_image_input from "../src/components/profile_image_input";
 Vue.component("profile-image-input", profile_image_input);
 
+import product_images_card from "../src/components/product_cards/product_images_card";
+Vue.component("product-images-card", product_images_card)
+
 document.addEventListener("turbolinks:load", () => {
   new Vue({
     store

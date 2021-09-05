@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get '/:slug', to: "products#show", as: :show
     authenticate :user do
       # favorites
-      get '/:slug/favori', to: "products#favorite", as: :favorite
+      post '/:slug/favori', to: "products#favorite", as: :favorite
       delete '/:slug/favori', to: "products#unfavorite", as: :unfavorite
     end
   end

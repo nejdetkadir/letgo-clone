@@ -33,6 +33,10 @@ class ProductImagesUploader < CarrierWave::Uploader::Base
     process resize_and_pad: [244, 183]
   end
 
+  version :cover do
+    process resize_and_pad: [800, 400]
+  end
+
   # Add an allowlist of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_allowlist

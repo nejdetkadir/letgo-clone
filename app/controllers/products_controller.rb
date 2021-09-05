@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product
 
   def show
+    @like_products = @product.category.products.selling.limit(20)
   end
 
   def favorite
