@@ -1,0 +1,7 @@
+tr:
+  views:
+    pagination:
+      first: "İlk"
+      last: "Son"
+      previous: "Önceki"
+      next: "Sonraki"

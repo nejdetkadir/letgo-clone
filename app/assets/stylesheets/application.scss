@@ -281,6 +281,28 @@ i.cursorable{
   }
 }
 
+ul.pagination{
+  li.page-item{
+
+    &.current{
+      color: #ff3f55;
+      padding: .375rem .75rem;
+      position: relative;
+      display: block;
+      text-decoration: none;
+      background-color: #e9ecef;
+      border: 1px solid #ff3f55;
+      transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+      margin-left: -1px;
+    }
+
+    a.page-link{
+      border-color: rgb(255, 63, 85);
+      color: rgb(255, 63, 85);
+    }
+  }
+}
+
 /*
 .turbolinks-progress-bar {
   background-color: rgb(255, 63, 85);
