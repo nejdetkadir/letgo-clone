@@ -1,7 +1,13 @@
 authenticate :user do
   scope 'uyelik', module: 'membership', as: 'membership' do
     get '/', to: 'home#index', as: :root
-    
+
+    scope 'sehirler', as: 'cities' do
+      post '/', to: 'cities#cities', as: :cities
+      post '/:city_id', to: 'cities#towns', as: :towns
+      post '/:city_id/:town_id', to: 'cities#districts', as: :districts
+    end
+
     scope 'ayarlar', as: 'settings' do
       get '/', to: 'settings#index', as: 'root'
       patch '/profile_image', to: 'settings#update_profile_image', as: :profile_image

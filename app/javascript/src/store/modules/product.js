@@ -5,16 +5,20 @@ const product = {
       isLoading: false,
       step: 1,
       images: [],
+      price: "",
+      description: "",
+      name: "",
       categoryId: -1,
-      isSaved: {
-        status: false,
-        id: null
-      }
     }
   }),
   mutations: {
     setCategoryId(state, id) {
       state.form.categoryId = id;
+    },
+    setFormData(state, {name, description, price}) {
+      state.form.name = name;
+      state.form.description = description;
+      state.form.price = price;
     },
     pushImage(state, file) {
       state.form.images.push(file);
@@ -30,16 +34,11 @@ const product = {
         isLoading: false,
         step: 1,
         images: [],
+        price: "",
+        description: "",
+        name: "",
         categoryId: -1,
-        isSaved: {
-          status: false,
-          id: null
-        }
-      };
-    },
-    changeSavedStatus(state, id) {
-      state.form.isSaved.status = !state.form.isSaved.status;
-      state.form.isSaved.id = id;
+      }
     },
     changeLoadingStatus(state) {
       state.form.isLoading = !state.form.isLoading;

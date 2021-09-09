@@ -37,9 +37,6 @@ export default {
     onSearch() {
       window.console.log("onSearch")
     },
-  },
-  mounted() {
-    console.log(isMobile)
   }
 }
 </script>

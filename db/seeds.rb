@@ -12,6 +12,8 @@ Category.create(name: "Bebek ve Çocuk", icon: "fas-baby-carriage", color: "#20c
 Category.create(name: "Film, Kitap ve Müzik", icon: "fas-headphones", color: "#ec7ebd", description: "Boş zamanını keyifli geçirmek, günün stresini atmak için ihtiyacın olan her şey için #{Setting.title.downcase}'nun Film, Kitap ve Müzik kategorisine göz atabilirsin. İkinci el DVD ve Blu-ray'ler, yerli ve yabancı filmler, romanlar, öyküler, ders kitapları, İngilizce kitaplar, çizgi romanlar, müzik CD'leri ve müzik aletleri gibi birçok ürünü cazip fırsatlara alabilirsin. Koleksiyonunun bulması zor parçası veya hobilerin için ihtiyacın olan her şey de #{Setting.title.downcase}’da. Para kazanmak istersen seninle aynı ilgi alanlarını paylaşan diğer insanlara veya koleksiyonculara ikinci el film ve kitaplarını satabilirsin.")
 Category.create(name: "Diğer", icon: "fab-buffer", color: "#e1c340")
 
+=begin
+
 10.times do |user|
   User.create(
     email: user == 0 ? "nejdetkadir.550@gmail.com" : Faker::Internet.email,
@@ -39,6 +41,8 @@ Category.create(name: "Diğer", icon: "fab-buffer", color: "#e1c340")
   }
 
 end
+
+=end
 
 # import all static data
 Rake::Task['import:all'].invoke

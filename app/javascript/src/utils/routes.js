@@ -26,4 +26,19 @@ const categories = {
   }
 }
 
-module.exports = {products, categories, membership};
+const cities = {
+  cities: {
+    path: "/uyelik/sehirler",
+    type: "POST"
+  },
+  towns: {
+    path: "/uyelik/sehirler/CITY_ID",
+    type: "POST"
+  },
+  districts: {
+    path: "/uyelik/sehirler/CITY_ID/TOWN_ID",
+    type: "POST"
+  }
+}
+
+module.exports = {products, categories, membership, cities};

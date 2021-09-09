@@ -3,10 +3,6 @@ import {mapState, mapMutations} from "vuex";
 import draggable from "vuedraggable";
 import fileInput from "./file_input.vue";
 import { required, maxLength } from "vuelidate/lib/validators";
-import Rails from "@rails/ujs";
-import {products} from "../../utils/routes";
-import {handleFormData} from "../../utils/helpers";
-import toastr from "toastr";
 
 export default {
   data() {
@@ -16,7 +12,6 @@ export default {
         isFree: false,
         name: "",
         description: "",
-        isDisabled: false,
       },
       validations: {
         maxDescriptionLength: 1500,
@@ -27,51 +22,15 @@ export default {
     ...mapState("product", ["form"])
   },
   methods: {
-    ...mapMutations("product", ["nextStep", "changeSavedStatus", "changeLoadingStatus"]),
+    ...mapMutations("product", ["nextStep", "setFormData"]),
     handleImage(file) {
       return URL.createObjectURL(file)
     },
     onSubmitForm() {
       this.$v.$touch()
       if (!this.$v.$invalid) {
-        this.changeLoadingStatus(); // loading: true
-        
-        Rails.ajax({
-          beforeSend: () => true,
-          url: products.create.path,
-          type: products.create.type,
-          dataType: "json",
-          data: handleFormData("product",
-            [
-              {
-                name: this.inputForm.name
-              },
-              {
-                description: this.inputForm.description
-              },
-              {
-                price: this.inputForm.isFree ? "0" : this.inputForm.price
-              },
-              {
-                category_id: this.form.categoryId
-              },
-              {
-                images: this.form.images
-              }
-            ],
-            "images"
-          ),
-          success: (res) => {
-            if (res.slug != undefined) {
-              this.changeSavedStatus(res.id);
-              this.nextStep();
-            } else {
-              toastr.error("Bir hata meydana geldi.")
-            }
-
-            this.changeLoadingStatus(); // loading: false
-          }
-        });
+        this.setFormData({name: this.inputForm.name, description: this.inputForm.description, price: (this.inputForm.isFree ? "0.0" : this.inputForm.price)})
+        this.nextStep();
       }
     }
   },
@@ -149,7 +108,7 @@ export default {
       <div class="text-end">{{inputForm.description.length}}/{{validations.maxDescriptionLength}}</div>
     </div>
     <div class="d-grid">
-      <button class="btn btn-letgo" :disabled="inputForm.isDisabled || $v.inputForm.$invalid || form.isLoading" @click.prevent="onSubmitForm">{{form.isLoading ? "Yükleniyor" : "Onayla"}}</button>
+      <button class="btn btn-letgo" :disabled="$v.inputForm.$invalid" @click.prevent="onSubmitForm">Onayla</button>
     </div>
   </div>  
 </template>

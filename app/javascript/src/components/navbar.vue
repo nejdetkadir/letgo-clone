@@ -26,7 +26,7 @@ export default {
     <div class="container">
       <div :class="{'col-2 text-center' : !isMobile, 'col-3' : isMobile}">
         <a href="/">
-          <img src="/assets/letgo-logo.png" :height="isMobile ? 40 : 45">
+          <img src="/images/static/letgo-logo.png" :height="isMobile ? 40 : 45">
         </a>
       </div>
       <div :class="{'col-6' : !isMobile, 'col-7' : isMobile}">
