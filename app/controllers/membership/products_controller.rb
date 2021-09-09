@@ -17,7 +17,7 @@ class Membership::ProductsController < MembershipController
   private
   
   def product_params
-    params.require(:product).permit(:name, :description, :price, :category_id, {images: []})
+    params.require(:product).permit(:name, :description, :price, :category_id, {images: []}, :quarter_id)
   end
 
   def status_params

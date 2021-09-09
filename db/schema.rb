@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_09_111038) do
+ActiveRecord::Schema.define(version: 2021_09_09_193229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,9 @@ ActiveRecord::Schema.define(version: 2021_09_09_111038) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "category_id", null: false
     t.string "slug"
+    t.bigint "quarter_id", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["quarter_id"], name: "index_products_on_quarter_id"
     t.index ["slug"], name: "index_products_on_slug", unique: true
     t.index ["user_id"], name: "index_products_on_user_id"
   end
@@ -120,6 +122,7 @@ ActiveRecord::Schema.define(version: 2021_09_09_111038) do
   add_foreign_key "favorites", "products"
   add_foreign_key "favorites", "users"
   add_foreign_key "products", "categories"
+  add_foreign_key "products", "quarters"
   add_foreign_key "products", "users"
   add_foreign_key "quarters", "districts"
   add_foreign_key "towns", "cities"

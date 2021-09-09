@@ -13,6 +13,7 @@ class Product < ApplicationRecord
   # associations
   belongs_to :user
   belongs_to :category
+  belongs_to :quarter
   has_many :favorites, dependent: :destroy
 
   # custom callbacks
