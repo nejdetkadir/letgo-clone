@@ -1,13 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 
 # Categories
-
 Category.create(name: "Elektronik", icon: "fas-mobile", color: "#6bcebb", description: "Her gün gelişmekte olan teknoloji hayatımızın büyük bir parçası haline gelirken elektronik ürünlere olan ilgimiz ve ihtiyacımız da arttı. Telefondan televizyona, hoparlörlerden kulaklıklara, fotoğraf makinelerinden bilgisayara, drone’lardan retro kameralara birçok ikinci el elektronik ürün #{Setting.title.downcase}’da. Almak istediğin ürünün sıfırını almak yerine #{Setting.title.downcase}’da ikinci elini daha uygun fiyatlara, daha ucuza satın alabilirsin. Üstelik lokasyon bazlı arama sayesinde ilk olarak çevrendeki ilanlara ulaşabilir, bu sayede daha hızlı alım-satım yapabilirsin. İstersen bir arama uyarısı ayarlayarak etrafındaki yeni ilanlardan haberdar olabilirsin. Ayrıca artık kullanmadığın ya da yeni modeliyle değiştirmeyi düşündüğün elektronik eşyanı hemen ilan verebilir, #{Setting.title.downcase}'da satarak para kazanabilirsin.")
 Category.create(name: "Spor, Eğlence ve Oyunlar", icon: "fas-basketball-ball", color: "#a3ce71", description: "İkinci el oyun konsolları, PC ve konsol oyunları, kutu oyunları, gamer aksesuarları, egzersiz ekipmanları, spor ve outdoor malzemeleri, eliptik bisiklet, bisiklet çeşitleri ve çok daha fazlası çok uygun fiyatlarla #{Setting.title.downcase}’da. İster çevrendeki satıcılar tarafından her gün yayınlanan binlerce ilan arasından istediğin ürünü ara ister kullanmadığın ikinci el oyun, oyun konsolu, bisiklet, egzersiz aletleri ve spor malzemelerini #{Setting.title.downcase}'da sat, para kazan.")
 Category.create(name: "Araba", icon: "fas-car", color: "#327fb6", description: "Araba almak ya da arabanı mı satmak istiyorsun? #{Setting.title.downcase}’da ikinci el araba alıp satmak çok kolay! Marka, model, motor ve paket, yıl, kilometre, vites, kasa tipi, yakıt türü, güç aktarımı, koltuk sayısı gibi geliştirilmiş filtreleri kullanarak, ikinci el otomobil ilanları arasından aradığın arabayı kolayca bulabilirsin. Hem de uygun fiyatlara! Üstelik lokasyon bazlı arama sayesinde ilk olarak çevrendeki ilanlara ulaşabilir, bu sayede daha hızlı alım-satım yapabilirsin. İstersen bir arama uyarısı ayarlayarak etrafındaki yeni ilanlardan herkesten önce haberdar olabilirsin.")
@@ -45,3 +39,6 @@ Category.create(name: "Diğer", icon: "fab-buffer", color: "#e1c340")
   }
 
 end
+
+# import all static data
+Rake::Task['import:all'].invoke
