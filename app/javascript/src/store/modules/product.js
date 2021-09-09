@@ -9,11 +9,14 @@ const product = {
       description: "",
       name: "",
       categoryId: -1,
-    }
+      categoryIndex: -1
+    },
+    sidebarOpened: false
   }),
   mutations: {
-    setCategoryId(state, id) {
+    setCategoryId(state, {id, index}) {
       state.form.categoryId = id;
+      state.form.categoryIndex = index;
     },
     setFormData(state, {name, description, price}) {
       state.form.name = name;
@@ -38,10 +41,17 @@ const product = {
         description: "",
         name: "",
         categoryId: -1,
+        categoryIndex: -1
       }
     },
     changeLoadingStatus(state) {
       state.form.isLoading = !state.form.isLoading;
+    },
+    openSidebar(state) {
+      state.sidebarOpened = true;
+    },
+    closeSidebar(state) {
+      state.sidebarOpened = false;
     }
   },
   actions: {}

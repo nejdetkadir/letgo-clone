@@ -1,6 +1,7 @@
 <script>
 import searchBar from "./search_bar.vue";
 import { isMobile } from 'mobile-device-detect';
+import {mapMutations} from "vuex";
 
 export default {
   data() {
@@ -17,6 +18,13 @@ export default {
   },
   components: {
     searchBar
+  },
+  methods: {
+    ...mapMutations("product", ["openSidebar"]),
+    onOpenSidebar() {
+      this.openSidebar();
+      document.body.style = "overflow: hidden; padding-right: 0px;"
+    }
   }
 }
 </script>
@@ -34,7 +42,11 @@ export default {
       </div>
       <div :class="{'col-4' : !isMobile, 'col-2' : isMobile}">
         <div class="d-flex justify-content-evenly">
-          <button v-if="!isMobile" class="btn btn-letgo btn-sm fw-bold" type="button" :data-bs-toggle="isAuthenticated ? 'offcanvas' : 'modal'" :data-bs-target="isAuthenticated ? '#offcanvasProduct' : '#authenticationModal'" :aria-controls="isAuthenticated ? 'offcanvasProduct' : ''">
+          <button v-if="!isMobile && !isAuthenticated" class="btn btn-letgo btn-sm fw-bold" type="button" data-bs-toggle="modal" data-bs-target="#authenticationModal">
+            <i class="fas fa-camera me-2"></i>
+            Sat
+          </button>
+          <button v-if="!isMobile && isAuthenticated" class="btn btn-letgo btn-sm fw-bold" type="button" @click.prevent="onOpenSidebar">
             <i class="fas fa-camera me-2"></i>
             Sat
           </button>
