@@ -34,4 +34,8 @@ class Product < ApplicationRecord
   def set_default_status
     self.status ||= :selling
   end
+
+  def location
+    [quarter.district.town.city, quarter.district.town, quarter]
+  end
 end

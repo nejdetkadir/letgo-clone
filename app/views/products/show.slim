@@ -34,7 +34,11 @@ nav(aria-label='breadcrumb')
           .text-secondary #{@product.favorites.count}
     p.mt-3 #{@product.description}
     p.mt-3.fw-bold Konum
-    iframe style="width: 100%; height: 350px" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyASt0RDO6juxBvZg1umbG1MeOao05iIJDY&q=Mevlana,Bafra,Samsun"
+    nav(aria-label='breadcrumb')
+      ol.breadcrumb
+        - @product.location.each do |location|
+          li.breadcrumb-item.text-decoration-none #{location.name}
+    iframe style="width: 100%; height: 350px" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyASt0RDO6juxBvZg1umbG1MeOao05iIJDY&q=#{@product.location.map(&:name).reverse.join(',')}"
   .col-md-4
     .card
       .card-body
