@@ -1,7 +1,7 @@
 class ProductImagesUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
-  include CarrierWave::MiniMagick
+  include CarrierWave::RMagick
+  # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -28,6 +28,8 @@ class ProductImagesUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
+  process :watermark
+
   # Create different versions of your uploaded files:
   version :small do
     process resize_and_pad: [244, 183]
@@ -35,6 +37,17 @@ class ProductImagesUploader < CarrierWave::Uploader::Base
 
   version :cover do
     process resize_and_pad: [800, 400]
+  end
+
+  def watermark
+    manipulate! do |img|
+      logo = Magick::Image.read(Rails.root.join('app', 'assets', 'images', 'watermark.png')).first
+      newlogo = logo.resize_to_fit(img.rows > img.columns ? img.columns : img.columns / 2, nil)
+      newlogo.background_color = 'rgba(255,255,255,0.0)'
+      newlogo.rotate! '-35'.to_f
+      img = img.composite(newlogo, Magick::CenterGravity, 15, 0, Magick::OverCompositeOp)
+      img
+    end
   end
 
   # Add an allowlist of extensions which are allowed to be uploaded.

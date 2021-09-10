@@ -38,7 +38,8 @@ gem "recaptcha"
 
 # image processing
 gem 'carrierwave', '~> 2.0'
-gem "mini_magick"
+gem 'mini_magick'
+gem 'rmagick'
 
 gem 'devise', github: 'heartcombo/devise', branch: 'master'
 
