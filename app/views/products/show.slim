@@ -10,7 +10,7 @@ nav(aria-label='breadcrumb')
     product-images-card(images_data="#{@product.images.to_json}" product_name="#{@product.name}")
     .d-flex.justify-content-between.align-items-center.mt-4
       h2.fw-bolder
-        - if @product.price.eql?("0.0")
+        - if @product.price.eql?(0.0)
           | Ücretsiz
         - else
           | #{@product.price} TL
@@ -24,7 +24,7 @@ nav(aria-label='breadcrumb')
       .d-flex.align-items-center
         div  
           = icon "fas", "clock", class: "text-secondary me-2"
-        .text-secondary 2 saat önce
+        .text-secondary #{time_ago_in_words(@product.created_at).capitalize} önce
       .d-flex.align-items-center
         .d-flex.align-items-center.me-4
           = icon "fas", "eye", class: "text-secondary me-2"
