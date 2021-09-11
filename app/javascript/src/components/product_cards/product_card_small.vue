@@ -17,11 +17,12 @@ export default {
         pagination: true,
         autoplay: false
       },
-      deleteModalShowing: false
+      deleteModalShowing: false,
+      likedIt: this.liked_it == "true"
     }
   },
   // card_type == 1 admin | card_type == 2 any user
-  props: ["product_data", "category_data", "card_type"],
+  props: ["product_data", "category_data", "card_type", "liked_it"],
   components: {
     Splide,
     SplideSlide
@@ -83,6 +84,24 @@ export default {
       this.deleteModalShowing = false;
       document.body.classList.toggle("overflow-hidden");
       document.querySelector(".modal-backdrop").remove();
+    },
+    onClickFavorite() {
+      Rails.ajax({
+        beforeSend: () => true,
+        url: products.view.favorite.replace("ID", this.product.slug),
+        type: "POST",
+        dataType: "json",
+        success: (res) => {
+          this.likedIt = res.status == "unfavorited" ? false : true;
+          if (res.status == "unfavorited" && document.body.contains(document.getElementById("pills-profile-tab-content"))) {
+            // remove element from page
+            document.querySelector(`.product-card-small[data-id="${this.product.id}"]`).parentNode.remove();
+          }
+        },
+        error: () => {
+          document.querySelector('button[data-bs-target="#authenticationModal"]').click();
+        }
+      });
     }
   }
 }
@@ -95,6 +114,13 @@ export default {
         <img :src="image.small.url" :alt="product.name" class="card-img-top" @click.prevent="goToDetailPage">
       </splide-slide>
     </splide>
+    <div v-if="card_type == 2" class="card-img-overlay">
+      <div class="card-title text-end favorite-product-btn">
+        <button class="btn" :class="{'liked' : likedIt}" @click.prevent="onClickFavorite">
+          <i class="fas fa-heart"></i>
+        </button>
+      </div>
+    </div>
     <div class="card-body border-top-0">
       <h6 class="card-title" @click="goToDetailPage">{{product.name}}</h6>
       <small>{{category.name}}</small>
@@ -150,5 +176,27 @@ export default {
 <style>
   .delete-product-modal-dialog{
     width: 420px;
+  }
+  .favorite-product-btn > button{
+    padding: 0;
+    background: #ccc;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    color: white;
+  }
+
+  .favorite-product-btn > button.liked{
+    color: #ff3f55;
+  }
+
+  .favorite-product-btn > button:hover{
+    background: #cccccc9e;
+    color: white;
+  }
+
+  .favorite-product-btn > button.liked:hover{
+    color: #ff3f55;
+    background: #cccccc9e;
   }
 </style>

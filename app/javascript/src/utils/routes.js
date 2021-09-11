@@ -9,8 +9,9 @@ const products = {
   },
   view: {
     show: "/ilan/",
+    favorite: "/ilan/ID/favori",
     edit: "/uyelik/ilan/ID/duzenle"
-  }
+  },
 }
 
 const membership = {

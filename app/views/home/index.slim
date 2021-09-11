@@ -3,6 +3,6 @@ category-splide(categories_data="#{active_categories.to_json}")
 .row.mt-5
   - @products.each do |product|
     .col-lg-3.col-md-6.mt-3
-      product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}" card_type="2")
+      product-card-small(product_data="#{product.to_json}" category_data="#{product.category.to_json}" card_type="2" liked_it="#{liked_it(product)}")
   .d-flex.justify-content-center.mt-5
     = paginate @products

@@ -14,11 +14,9 @@ Rails.application.routes.draw do
 
   scope 'ilan', as: 'product' do
     get '/:slug', to: "products#show", as: :show
-    authenticate :user do
-      # favorites
-      post '/:slug/favori', to: "products#favorite", as: :favorite
-      delete '/:slug/favori', to: "products#unfavorite", as: :unfavorite
-    end
+    
+    # favorites
+    post '/:slug/favori', to: "products#favorite", as: :favorite
   end
 
   # errors

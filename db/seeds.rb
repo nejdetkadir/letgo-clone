@@ -1,6 +1,9 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 
+# import all static data
+Rake::Task['import:all'].invoke
+
 # Categories
 Category.create(name: "Elektronik", icon: "fas-mobile", color: "#6bcebb", description: "Her gün gelişmekte olan teknoloji hayatımızın büyük bir parçası haline gelirken elektronik ürünlere olan ilgimiz ve ihtiyacımız da arttı. Telefondan televizyona, hoparlörlerden kulaklıklara, fotoğraf makinelerinden bilgisayara, drone’lardan retro kameralara birçok ikinci el elektronik ürün #{Setting.title.downcase}’da. Almak istediğin ürünün sıfırını almak yerine #{Setting.title.downcase}’da ikinci elini daha uygun fiyatlara, daha ucuza satın alabilirsin. Üstelik lokasyon bazlı arama sayesinde ilk olarak çevrendeki ilanlara ulaşabilir, bu sayede daha hızlı alım-satım yapabilirsin. İstersen bir arama uyarısı ayarlayarak etrafındaki yeni ilanlardan haberdar olabilirsin. Ayrıca artık kullanmadığın ya da yeni modeliyle değiştirmeyi düşündüğün elektronik eşyanı hemen ilan verebilir, #{Setting.title.downcase}'da satarak para kazanabilirsin.")
 Category.create(name: "Spor, Eğlence ve Oyunlar", icon: "fas-basketball-ball", color: "#a3ce71", description: "İkinci el oyun konsolları, PC ve konsol oyunları, kutu oyunları, gamer aksesuarları, egzersiz ekipmanları, spor ve outdoor malzemeleri, eliptik bisiklet, bisiklet çeşitleri ve çok daha fazlası çok uygun fiyatlarla #{Setting.title.downcase}’da. İster çevrendeki satıcılar tarafından her gün yayınlanan binlerce ilan arasından istediğin ürünü ara ister kullanmadığın ikinci el oyun, oyun konsolu, bisiklet, egzersiz aletleri ve spor malzemelerini #{Setting.title.downcase}'da sat, para kazan.")
@@ -11,8 +14,6 @@ Category.create(name: "Moda ve Aksesuar", icon: "fas-shoe-prints", color: "#fd7d
 Category.create(name: "Bebek ve Çocuk", icon: "fas-baby-carriage", color: "#20c3f3", description: "Tutumlu annelerin tercih ettiği birbirinden farklı ikinci el bebek ve çocuk kıyafetleri, oyuncaklar, bebek bezi, emzirme ürünleri, emzik, biberon, müslin ürünler, yürüteç, mama sandalyesi, puset, bebek arabası, anne kucağı, oto koltuğu, anne yanı bebek beşiği, park yatak, bebek battaniye, bebek küveti, monitörler, bebek telsizleri ve çok daha fazlası uygun fiyatlarla #{Setting.title.downcase}’nun Bebek ve Çocuk kategorisinde. Bebek bakımı için gerekli olan tüm ürünleri #{Setting.title.downcase}’da kolaylıkla bulabilir, çok daha ucuza alabilirsin. Bebeğin büyüdüğünde eşyalarını #{Setting.title.downcase}’da satabilir ve bu kazancını onun diğer ihtiyaçlarını karşılamak için kullanabilirsin. #{Setting.title.downcase}’da alışveriş yaparken diğer annelerin deneyimlerinden de faydalanmayı da unutma!")
 Category.create(name: "Film, Kitap ve Müzik", icon: "fas-headphones", color: "#ec7ebd", description: "Boş zamanını keyifli geçirmek, günün stresini atmak için ihtiyacın olan her şey için #{Setting.title.downcase}'nun Film, Kitap ve Müzik kategorisine göz atabilirsin. İkinci el DVD ve Blu-ray'ler, yerli ve yabancı filmler, romanlar, öyküler, ders kitapları, İngilizce kitaplar, çizgi romanlar, müzik CD'leri ve müzik aletleri gibi birçok ürünü cazip fırsatlara alabilirsin. Koleksiyonunun bulması zor parçası veya hobilerin için ihtiyacın olan her şey de #{Setting.title.downcase}’da. Para kazanmak istersen seninle aynı ilgi alanlarını paylaşan diğer insanlara veya koleksiyonculara ikinci el film ve kitaplarını satabilirsin.")
 Category.create(name: "Diğer", icon: "fab-buffer", color: "#e1c340")
-
-=begin
 
 10.times do |user|
   User.create(
@@ -34,15 +35,11 @@ Category.create(name: "Diğer", icon: "fab-buffer", color: "#e1c340")
         Faker::LoremPixel.image(size: "800x800", category: "sports"),
         Faker::LoremPixel.image(size: "800x800", category: "nature"),
         Faker::LoremPixel.image(size: "800x800", category: "cats"),
-      ]
+      ],
+      quarter: Quarter.all.sample
     )
 
     product_progress_bar&.increment
   }
 
 end
-
-=end
-
-# import all static data
-Rake::Task['import:all'].invoke

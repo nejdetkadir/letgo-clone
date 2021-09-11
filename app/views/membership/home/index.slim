@@ -39,7 +39,7 @@
           - else
             - @favorites.each do |favorite|
               .col-lg-4.col-md-6.mt-3
-                product-card-small(product_data="#{favorite.product.to_json}" category_data="#{favorite.product.category.to_json}" card_type="2")
+                product-card-small(product_data="#{favorite.product.to_json}" category_data="#{favorite.product.category.to_json}" card_type="2" liked_it="#{liked_it(favorite.product)}")
             .d-flex.justify-content-center.mt-5
               = paginate @favorites
         - elsif params[:tab].eql?("sold")
