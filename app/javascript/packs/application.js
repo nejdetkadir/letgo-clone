@@ -43,7 +43,10 @@ import profile_image_input from "../src/components/profile_image_input";
 Vue.component("profile-image-input", profile_image_input);
 
 import product_images_card from "../src/components/product_cards/product_images_card";
-Vue.component("product-images-card", product_images_card)
+Vue.component("product-images-card", product_images_card);
+
+import favorite_button from "../src/components/favorite_button";
+Vue.component("favorite-button", favorite_button);
 
 document.addEventListener("turbolinks:load", () => {
   new Vue({

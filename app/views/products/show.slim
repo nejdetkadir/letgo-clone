@@ -15,8 +15,7 @@ nav(aria-label='breadcrumb')
         - else
           | #{@product.price} TL
       .d-flex.align-items-center
-        = link_to product_favorite_path(@product), method: :post do
-          = icon "fas", "heart", class: "text-secondary me-4"
+        favorite-button(liked="#{liked_it(@product)}" slug="#{@product.slug}")
         = link_to root_path do
           = icon "fas", "share-alt", class: "text-secondary"
     h3.fw-normal.mt-3 #{@product.name}
