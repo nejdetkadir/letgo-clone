@@ -114,7 +114,7 @@ export default {
         <img :src="image.small.url" :alt="product.name" class="card-img-top" @click.prevent="goToDetailPage">
       </splide-slide>
     </splide>
-    <div v-if="card_type == 2" class="card-img-overlay">
+    <div v-if="card_type == 2" class="custom-card-img-overlay">
       <div class="card-title text-end favorite-product-btn">
         <button class="btn" :class="{'liked' : likedIt}" @click.prevent="onClickFavorite">
           <i class="fas fa-heart"></i>
@@ -177,6 +177,7 @@ export default {
   .delete-product-modal-dialog{
     width: 420px;
   }
+
   .favorite-product-btn > button{
     padding: 0;
     background: #ccc;
@@ -198,5 +199,12 @@ export default {
   .favorite-product-btn > button.liked:hover{
     color: #ff3f55;
     background: #cccccc9e;
+  }
+  
+  .custom-card-img-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1rem;
   }
 </style>
