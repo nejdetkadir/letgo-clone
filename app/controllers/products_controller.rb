@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
 
   def show
     @like_products = @product.category.products.selling.limit(20)
+    update_view_count(@product)
   end
 
   def favorite
