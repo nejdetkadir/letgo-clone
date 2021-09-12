@@ -9,7 +9,8 @@ const product = {
       description: "",
       name: "",
       categoryId: -1,
-      categoryIndex: -1
+      categoryIndex: -1,
+      savedProductSlug: null
     },
     sidebarOpened: false
   }),
@@ -41,7 +42,8 @@ const product = {
         description: "",
         name: "",
         categoryId: -1,
-        categoryIndex: -1
+        categoryIndex: -1,
+        savedProductSlug: null
       }
     },
     changeLoadingStatus(state) {
@@ -52,6 +54,9 @@ const product = {
     },
     closeSidebar(state) {
       state.sidebarOpened = false;
+    },
+    setSavedProductSlug(state, slug) {
+      state.form.savedProductSlug = slug;
     }
   },
   actions: {}

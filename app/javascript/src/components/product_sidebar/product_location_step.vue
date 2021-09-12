@@ -21,7 +21,7 @@ export default {
     ...mapState("product", ["form"])
   },
   methods: {
-    ...mapMutations("product", ["nextStep", "changeLoadingStatus"]),
+    ...mapMutations("product", ["nextStep", "changeLoadingStatus", "setSavedProductSlug"]),
     getCities() {
       Rails.ajax({
         beforeSend: () => true,
@@ -112,7 +112,12 @@ export default {
             "images"
           ),
           success: (res) => {
-            res.slug != undefined ? this.nextStep() : toastr.error("Bir hata meydana geldi.");
+            if (res.slug != undefined) {
+              this.setSavedProductSlug(res.slug);
+              this.nextStep();
+            } else {
+              toastr.error("Bir hata meydana geldi.");
+            }
             this.changeLoadingStatus(); // loading: false
           }
         });

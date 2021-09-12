@@ -10,4 +10,16 @@ module ApplicationHelper
       false
     end
   end
+
+  def not_current_user(model)
+    if user_signed_in?
+      if current_user.id == model.user.id
+        false
+      else
+        true
+      end
+    else
+      true
+    end
+  end
 end

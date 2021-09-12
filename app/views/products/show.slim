@@ -15,7 +15,8 @@ nav(aria-label='breadcrumb')
         - else
           | #{@product.price} TL
       .d-flex.align-items-center
-        favorite-button(liked="#{liked_it(@product)}" slug="#{@product.slug}")
+        - if not_current_user(@product)
+          favorite-button(liked="#{liked_it(@product)}" slug="#{@product.slug}")
         = link_to root_path do
           = icon "fas", "share-alt", class: "text-secondary"
     h3.fw-normal.mt-3 #{@product.name}
@@ -46,13 +47,14 @@ nav(aria-label='breadcrumb')
           .fw-bold.text-decoration-none.text-secondary #{@product.user.fullname}
           .text-secondary
             = icon "fas", "arrow-right"
-        .mt-3
-          p.mb-1 Satıcıya mesaj at:
-          .form-floating.mb-3
-            input.form-control.floating(placeholder="#{@product.user.fullname} ile mesajlaş")
-            label #{@product.user.fullname} ile mesajlaş
-          .d-grid
-            button.btn.btn-letgo.fw-bold Gönder
+        - if not_current_user(@product)
+          .mt-3
+            p.mb-1 Satıcıya mesaj at:
+            .form-floating.mb-3
+              input.form-control.floating(placeholder="#{@product.user.fullname} ile mesajlaş")
+              label #{@product.user.fullname} ile mesajlaş
+            .d-grid
+              button.btn.btn-letgo.fw-bold Gönder
 .row.mb-5
   h2.fw-bold Beğenbileceğin diğer ilanlar
   - @like_products.each do |product|

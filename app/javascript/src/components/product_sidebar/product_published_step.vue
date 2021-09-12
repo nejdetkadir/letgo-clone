@@ -1,9 +1,16 @@
 <script>
-import {mapMutations} from "vuex";
+import {mapMutations, mapState} from "vuex";
+import {products} from "../../utils/routes";
 
 export default {
+  computed: {
+    ...mapState("product", ["form"])
+  },
   methods: {
-    ...mapMutations("product", ["resetStep"])
+    ...mapMutations("product", ["resetStep"]),
+    goToDetailPage() {
+      window.location.href = products.view.show + this.form.savedProductSlug;
+    }
   }
 }
 </script>
@@ -12,7 +19,10 @@ export default {
   <div class="text-center mt-5">
     <h1>Tebrikler!</h1>
     <p class="text-secondary mt-5">Ürünün yayınlandı.</p>
-    <button @click.prevent="resetStep" class="btn btn-letgo mt-4 fw-bold">Başka bir ilan yükle</button>
+    <div class="d-grid ps-5 pe-5 mt-4">
+      <button @click.prevent="goToDetailPage" class="btn btn-letgo-outline fw-bold">İlanı gör</button>
+      <button @click.prevent="resetStep" class="btn btn-letgo mt-4 fw-bold">Başka bir ilan yükle</button>
+    </div>
     <p class="mt-5"><small>Bu ilanı arkadaşlarınla paylaş</small></p>
     <div class="d-flex mt-5 justify-content-evenly align-items-center share-product-icons-group">
       <i class="fab fa-facebook"></i>

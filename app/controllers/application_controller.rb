@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  prepend_before_action :configure_recaptcha, if: :devise_controller?
+  # prepend_before_action :configure_recaptcha, if: :devise_controller?
 
   def configure_recaptcha
     Recaptcha.configure do |config|

@@ -86,7 +86,7 @@ export default {
         </div>
       </div>
     </div>
-    <div class="offcanvas-backdrop fade show" v-if="sidebarOpened"></div>
+    <div class="offcanvas-backdrop fade show" v-if="sidebarOpened" @click.prevent="onCloseSidebar"></div>
   </div>
 </template>
 

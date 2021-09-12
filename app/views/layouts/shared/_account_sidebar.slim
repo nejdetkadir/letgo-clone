@@ -8,7 +8,6 @@
       - if user_signed_in?
         = link_to membership_settings_root_path, class: "btn fw-normal text-white text-decoration-none p-0 text-start" do
           .text-start #{current_user.fullname}
-          small.text-start Bandırma
       - else
         button.btn.fw-normal.text-white.text-decoration-none.p-0(type="button" data-bs-toggle="modal" data-bs-target="#authenticationModal")
           | Şimdi giriş yap
