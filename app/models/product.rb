@@ -15,6 +15,7 @@ class Product < ApplicationRecord
   belongs_to :category
   belongs_to :quarter
   has_many :favorites, dependent: :destroy
+  has_many :conversations, dependent: :destroy
 
   # custom callbacks
   after_initialize :set_default_status, :if => :new_record?

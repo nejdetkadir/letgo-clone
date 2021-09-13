@@ -19,6 +19,13 @@ authenticate :user do
       end
     end
 
+    scope 'mesajlar', as: 'messages' do
+      get '/', to: 'messages#index', as: :root
+      post '/:product_id/sorusor', to: 'messages#check_conversation', as: :check_conversation
+      get '/:conversation_id', to: 'messages#conversation', as: :show_conversation
+      post '/:conversation_id', to: 'messages#create', as: :create
+    end
+
     scope 'ilan', as: 'product' do
       post '/yeni', to: 'products#create', as: :create
       post '/:id', to: "products#status", as: :status

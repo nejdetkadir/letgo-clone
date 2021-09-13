@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_09_193229) do
+ActiveRecord::Schema.define(version: 2021_09_13_133037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 2021_09_09_193229) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "from_id", null: false
+    t.bigint "to_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["from_id"], name: "index_conversations_on_from_id"
+    t.index ["product_id"], name: "index_conversations_on_product_id"
+    t.index ["to_id"], name: "index_conversations_on_to_id"
+  end
+
   create_table "districts", force: :cascade do |t|
     t.string "name"
     t.bigint "town_id", null: false
@@ -49,6 +60,17 @@ ActiveRecord::Schema.define(version: 2021_09_09_193229) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_favorites_on_product_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "conversation_id", null: false
+    t.bigint "user_id", null: false
+    t.text "message"
+    t.string "image"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -118,9 +140,14 @@ ActiveRecord::Schema.define(version: 2021_09_09_193229) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
+  add_foreign_key "conversations", "products"
+  add_foreign_key "conversations", "users", column: "from_id"
+  add_foreign_key "conversations", "users", column: "to_id"
   add_foreign_key "districts", "towns"
   add_foreign_key "favorites", "products"
   add_foreign_key "favorites", "users"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "quarters"
   add_foreign_key "products", "users"

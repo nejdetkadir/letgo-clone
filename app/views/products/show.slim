@@ -48,13 +48,13 @@ nav(aria-label='breadcrumb')
           .text-secondary
             = icon "fas", "arrow-right"
         - if not_current_user(@product)
-          .mt-3
+          = form_with html: {class: "mt-3"}, model: @message, url: membership_messages_check_conversation_path(@product.id) do |f|
             p.mb-1 Satıcıya mesaj at:
             .form-floating.mb-3
-              input.form-control.floating(placeholder="#{@product.user.fullname} ile mesajlaş")
-              label #{@product.user.fullname} ile mesajlaş
+              = f.text_field :message, class: "form-control floating", placeholder: "#{@product.user.fullname} ile mesajlaş"
+              = f.label "#{@product.user.fullname} ile mesajlaş"
             .d-grid
-              button.btn.btn-letgo.fw-bold Gönder
+              = f.submit "Gönder", class: "btn btn-letgo fw-bold"
 .row.mb-5
   h2.fw-bold Beğenbileceğin diğer ilanlar
   - @like_products.each do |product|

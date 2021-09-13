@@ -1,0 +1,4 @@
+pre #{@conversation.to_json}
+
+- @conversation.messages.each do |mes|
+  li #{mes.message}

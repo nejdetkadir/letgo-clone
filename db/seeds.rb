@@ -25,19 +25,21 @@ Category.create(name: "Diğer", icon: "fab-buffer", color: "#e1c340")
   product_progress_bar = ProgressBar.create(:title => "Fake products creating for #{User.last.fullname}", :starting_at => 0, :total => 20)
 
   20.times {
-    User.last.products.create(
+    product = User.last.products.new(
       name: Faker::Commerce.product_name,
       category: Category.active.sample,
       description: Faker::Lorem.sentence,
       price: Faker::Commerce.price,
       remote_images_urls: [
-        Faker::LoremPixel.image(size: "800x800", category: "technics"),
-        Faker::LoremPixel.image(size: "800x800", category: "sports"),
-        Faker::LoremPixel.image(size: "800x800", category: "nature"),
-        Faker::LoremPixel.image(size: "800x800", category: "cats"),
+        "https://images.pexels.com/photos/7762710/pexels-photo-7762710.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
       ],
       quarter: Quarter.all.sample
     )
+
+    if product.save
+    else
+      puts product.errors.full_messages
+    end
 
     product_progress_bar&.increment
   }
